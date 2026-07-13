@@ -8,15 +8,14 @@
     <meta name="description" content="Briyo Café es un oasis de buena comida, gente amable y pasión en los detalles. Desayuno y brunch con mucho feeling en León, Gto.">
     <meta name="keywords" content="cafetería, brunch, desayuno, León, Guanajuato, café, comida">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
-    <!-- Google Fonts -->
+    <!-- Google Fonts (Inter + Playfair Display para detalles) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- CSS propio (todo incluido aquí) -->
     <style>
-        /* ===== RESET Y VARIABLES ===== */
+        /* ===== RESET & VARIABLES ===== */
         * {
             margin: 0;
             padding: 0;
@@ -24,19 +23,18 @@
         }
 
         :root {
-            --color-primary: #3E2C1B;
-            --color-secondary: #8B6B4B;
-            --color-accent: #C89B6E;
-            --color-cream: #F9F2E7;
-            --color-light: #FFF8F0;
-            --color-white: #FFFFFF;
-            --color-dark: #1E130B;
+            --color-bg-dark: #0f0e0d;
+            --color-bg-light: #f6f4f0;
+            --color-primary: #c49a6c;
+            --color-primary-dark: #a8835a;
+            --color-text-light: #faf8f5;
+            --color-text-dark: #1c1815;
+            --color-border: #2a2520;
             --color-whatsapp: #25D366;
-            --shadow: 0 8px 24px rgba(0,0,0,0.08);
+            --shadow: 0 8px 32px rgba(0,0,0,0.12);
             --radius: 12px;
-            --transition: 0.3s ease;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-serif: 'Playfair Display', serif;
-            --font-sans: 'Lato', sans-serif;
         }
 
         html {
@@ -45,9 +43,10 @@
 
         body {
             font-family: var(--font-sans);
-            background-color: var(--color-cream);
-            color: var(--color-primary);
+            background-color: var(--color-bg-light);
+            color: var(--color-text-dark);
             line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
@@ -73,45 +72,62 @@
         /* ===== BOTONES ===== */
         .btn {
             display: inline-block;
-            padding: 0.75rem 2rem;
+            padding: 0.8rem 2.2rem;
             border-radius: 50px;
             font-weight: 700;
-            font-size: 1rem;
-            border: none;
+            font-size: 0.95rem;
+            border: 2px solid transparent;
             cursor: pointer;
-            transition: var(--transition);
+            transition: all 0.25s ease;
             text-align: center;
             font-family: var(--font-sans);
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
         }
 
         .btn--primary {
             background-color: var(--color-primary);
-            color: var(--color-white);
+            color: #0f0e0d;
+            border-color: var(--color-primary);
         }
         .btn--primary:hover {
-            background-color: var(--color-secondary);
+            background-color: var(--color-primary-dark);
+            border-color: var(--color-primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(62,44,27,0.3);
+            box-shadow: 0 6px 20px rgba(196, 154, 108, 0.35);
+        }
+
+        .btn--outline-light {
+            background: transparent;
+            color: #fff;
+            border-color: rgba(255,255,255,0.5);
+        }
+        .btn--outline-light:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: #fff;
+            transform: translateY(-2px);
         }
 
         .btn--whatsapp {
             background-color: var(--color-whatsapp);
-            color: var(--color-white);
+            color: #fff;
+            border-color: var(--color-whatsapp);
         }
         .btn--whatsapp:hover {
-            background-color: #1ebd5e;
+            background-color: #1da85c;
+            border-color: #1da85c;
             transform: translateY(-2px);
-            box-shadow: 0 6px 16px rgba(37,211,102,0.4);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
         }
 
-        .btn--secondary {
-            background-color: transparent;
-            color: var(--color-primary);
-            border: 2px solid var(--color-primary);
+        .btn--dark {
+            background-color: var(--color-text-dark);
+            color: #fff;
+            border-color: var(--color-text-dark);
         }
-        .btn--secondary:hover {
-            background-color: var(--color-primary);
-            color: var(--color-white);
+        .btn--dark:hover {
+            background-color: #2a2520;
+            border-color: #2a2520;
             transform: translateY(-2px);
         }
 
@@ -120,10 +136,9 @@
             position: sticky;
             top: 0;
             z-index: 1000;
-            background-color: rgba(255, 248, 240, 0.95);
-            backdrop-filter: blur(8px);
-            border-bottom: 1px solid rgba(62,44,27,0.08);
-            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            background-color: rgba(15, 14, 13, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
 
         .header__inner {
@@ -136,25 +151,22 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            font-size: 1.5rem;
+            gap: 0.75rem;
             font-family: var(--font-serif);
+            font-size: 1.6rem;
             font-weight: 700;
+            color: #fff;
         }
         .logo img {
-            height: 60px;
-            width: 60px;
-            display: block;
-            background-color: var(--color-primary);
-            padding: 8px;
+            height: 48px;
+            width: 48px;
             border-radius: 50%;
             object-fit: contain;
-        }
-        .logo__icon {
-            font-size: 1.8rem;
+            background-color: var(--color-primary);
+            padding: 4px;
         }
         .logo__highlight {
-            color: var(--color-accent);
+            color: var(--color-primary);
         }
 
         .nav__toggle {
@@ -168,9 +180,9 @@
         }
         .nav__hamburger {
             width: 26px;
-            height: 3px;
-            background-color: var(--color-primary);
-            border-radius: 3px;
+            height: 2px;
+            background-color: #fff;
+            border-radius: 2px;
             transition: var(--transition);
         }
 
@@ -180,20 +192,27 @@
             align-items: center;
         }
         .nav__list a {
-            font-weight: 400;
-            font-size: 1rem;
+            color: rgba(255,255,255,0.7);
+            font-weight: 500;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
             position: relative;
             padding: 0.25rem 0;
         }
         .nav__list a::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -2px;
             left: 0;
             width: 0;
             height: 2px;
-            background-color: var(--color-accent);
-            transition: var(--transition);
+            background-color: var(--color-primary);
+            transition: width 0.25s;
+        }
+        .nav__list a:hover {
+            color: #fff;
         }
         .nav__list a:hover::after {
             width: 100%;
@@ -202,156 +221,154 @@
         /* ===== HERO ===== */
         .hero {
             position: relative;
-            min-height: 90vh;
+            min-height: 92vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, #2c1a0e, #4a3222);
+            background: linear-gradient(145deg, #0f0e0d 0%, #1a1512 100%);
             background-image: url('img/Briyo.png');
             background-size: cover;
             background-position: center;
             background-blend-mode: overlay;
+            overflow: hidden;
         }
         .hero__overlay {
             position: absolute;
             inset: 0;
-            background: rgba(30, 19, 11, 0.55);
+            background: rgba(15,14,13,0.65);
             z-index: 1;
         }
         .hero__content {
             position: relative;
             z-index: 2;
-            color: var(--color-white);
+            color: #fff;
             max-width: 700px;
-            padding: 3rem 0;
+            padding: 4rem 0;
+        }
+        .hero__badge {
+            display: inline-block;
+            background: rgba(196,154,108,0.2);
+            border: 1px solid rgba(196,154,108,0.3);
+            padding: 0.3rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-primary);
+            margin-bottom: 1.5rem;
         }
         .hero__title {
             font-family: var(--font-serif);
-            font-size: 4rem;
+            font-size: 4.5rem;
             font-weight: 700;
             line-height: 1.1;
             margin-bottom: 0.5rem;
         }
+        .hero__title span {
+            color: var(--color-primary);
+        }
         .hero__subtitle {
-            font-size: 1.6rem;
+            font-size: 1.8rem;
             font-weight: 300;
             margin-bottom: 0.75rem;
-        }
-        .hero__accent {
-            color: #f5d6b3;
-            font-style: italic;
+            opacity: 0.9;
         }
         .hero__description {
             font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 2rem;
+            opacity: 0.8;
+            margin-bottom: 2.5rem;
+            max-width: 500px;
         }
-
         .hero__buttons {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
             align-items: center;
         }
-        .hero__cta {
-            margin-right: 0 !important;
-            margin-bottom: 0 !important;
-        }
 
         /* ===== SECCIONES GENERALES ===== */
         .section {
             padding: 5rem 0;
-            transition: opacity 0.8s ease, transform 0.8s ease;
         }
-
-        .section-hidden {
-            opacity: 0;
-            transform: translateY(30px);
+        .section--dark {
+            background-color: var(--color-bg-dark);
+            color: var(--color-text-light);
         }
-
-        .section-visible {
-            opacity: 1;
-            transform: translateY(0);
+        .section--light {
+            background-color: var(--color-bg-light);
+            color: var(--color-text-dark);
         }
 
         .section__title {
             font-family: var(--font-serif);
-            font-size: 2.8rem;
+            font-size: 3rem;
             font-weight: 700;
             text-align: center;
             margin-bottom: 0.5rem;
-            color: var(--color-primary);
+        }
+        .section__title--light {
+            color: var(--color-text-light);
+        }
+        .section__title--dark {
+            color: var(--color-text-dark);
         }
         .section__subtitle {
             text-align: center;
             font-size: 1.1rem;
-            color: var(--color-primary);
-            margin-bottom: 2.5rem;
+            font-weight: 300;
+            opacity: 0.7;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .section__subtitle--light {
+            color: rgba(255,255,255,0.7);
+        }
+        .section__subtitle--dark {
+            color: rgba(0,0,0,0.6);
         }
 
         /* ===== ABOUT ===== */
-        .about__content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
+        .about__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
         }
-
-        .about__lead {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--color-primary);
-            margin: 1.5rem 0 1.5rem 0;
-            line-height: 1.4;
-        }
-
-        .about__text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: var(--color-primary);
-        }
-
         .about__text p {
             margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
         }
-
         .about__text strong {
-            color: var(--color-secondary);
+            color: var(--color-primary-dark);
         }
-
-        .about__text em {
-            font-style: italic;
-            color: var(--color-accent);
-        }
-
         .about__badges {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
             gap: 1rem;
-            margin-top: 2.5rem;
+            margin-top: 2rem;
         }
-
         .about__badges span {
-            background: var(--color-white);
-            padding: 0.6rem 1.8rem;
+            background: var(--color-bg-dark);
+            color: #fff;
+            padding: 0.4rem 1.2rem;
             border-radius: 50px;
-            box-shadow: var(--shadow);
-            font-weight: 600;
-            font-size: 1rem;
-            color: var(--color-primary);
+            font-weight: 500;
+            font-size: 0.85rem;
             display: inline-flex;
             align-items: center;
-            gap: 0.6rem;
-            transition: var(--transition);
+            gap: 0.5rem;
         }
-
-        .about__badges span:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(0,0,0,0.12);
-        }
-
         .about__badges i {
-            color: var(--color-accent);
-            font-size: 1.1rem;
+            color: var(--color-primary);
+        }
+        .about__image img {
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
         }
 
         /* ===== MENÚ ===== */
@@ -364,76 +381,82 @@
         }
         .menu__filter-btn {
             background: transparent;
-            border: 2px solid var(--color-secondary);
+            border: 2px solid rgba(255,255,255,0.15);
             padding: 0.5rem 1.5rem;
             border-radius: 50px;
-            font-weight: 700;
-            font-size: 0.95rem;
+            font-weight: 600;
+            font-size: 0.85rem;
             cursor: pointer;
-            transition: var(--transition);
-            color: var(--color-primary);
+            transition: all 0.25s;
+            color: rgba(255,255,255,0.6);
             font-family: var(--font-sans);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         .menu__filter-btn.active,
         .menu__filter-btn:hover {
             background: var(--color-primary);
-            color: var(--color-white);
+            color: #0f0e0d;
             border-color: var(--color-primary);
         }
 
         .menu__grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 2rem;
         }
         .menu__item {
-            background: var(--color-white);
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
             border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            overflow: hidden;
-            transition: var(--transition);
-            padding: 1.2rem 1.5rem 1.5rem;
+            padding: 1.5rem;
+            transition: all 0.3s;
+            backdrop-filter: blur(4px);
         }
         .menu__item:hover {
             transform: translateY(-6px);
-            box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+            background: rgba(255,255,255,0.07);
+            border-color: rgba(196,154,108,0.3);
         }
         .menu__item-body h3 {
             font-family: var(--font-serif);
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             margin-bottom: 0.25rem;
+            color: #fff;
         }
         .menu__item-body .category {
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: var(--color-accent);
-            font-weight: 700;
+            letter-spacing: 1px;
+            color: var(--color-primary);
+            font-weight: 600;
         }
         .menu__item-body .description {
             font-size: 0.95rem;
-            color: var(--color-secondary);
+            color: rgba(255,255,255,0.6);
             margin: 0.5rem 0;
+            line-height: 1.5;
         }
         .menu__item-body .price {
             font-weight: 700;
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             color: var(--color-primary);
+            margin-top: 0.5rem;
         }
 
         /* ===== GALERÍA ===== */
         .gallery__grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 1.25rem;
         }
         .gallery__grid img {
             border-radius: var(--radius);
             box-shadow: var(--shadow);
             width: 100%;
-            height: 210px;
+            height: 240px;
             object-fit: cover;
-            transition: var(--transition);
+            transition: transform 0.3s;
             cursor: pointer;
         }
         .gallery__grid img:hover {
@@ -471,58 +494,54 @@
             top: 1.5rem;
             right: 2rem;
             font-size: 2.5rem;
-            color: var(--color-white);
+            color: #fff;
             cursor: pointer;
-            transition: var(--transition);
-            z-index: 10000;
+            transition: 0.3s;
             background: none;
             border: none;
             font-family: var(--font-serif);
         }
         .lightbox__close:hover {
-            color: var(--color-accent);
+            color: var(--color-primary);
             transform: scale(1.1);
         }
 
         /* ===== SERVICIOS ===== */
         .services__grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: 1.5rem;
             margin-top: 1rem;
         }
         .service-item {
-            background: var(--color-white);
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
             border-radius: var(--radius);
-            box-shadow: var(--shadow);
             padding: 1.8rem 1rem;
             text-align: center;
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
+            transition: 0.3s;
         }
         .service-item:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 32px rgba(0,0,0,0.12);
+            background: rgba(255,255,255,0.07);
+            border-color: rgba(196,154,108,0.2);
+            transform: translateY(-4px);
         }
         .service-item i {
-            font-size: 2.4rem;
-            color: var(--color-accent);
-            margin-bottom: 0.2rem;
+            font-size: 2.2rem;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
         }
         .service-item span {
             font-weight: 600;
-            font-size: 1rem;
-            color: var(--color-primary);
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.8);
         }
 
         /* ===== UBICACIÓN ===== */
         .location__grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2.5rem;
+            gap: 3rem;
             align-items: start;
         }
         .location__map iframe {
@@ -531,34 +550,34 @@
         }
         .location__info h3 {
             font-family: var(--font-serif);
-            font-size: 1.5rem;
+            font-size: 1.6rem;
             margin-bottom: 0.5rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
-        .location__address p,
-        .location__hours ul li {
+        .location__info p {
             margin-bottom: 0.5rem;
         }
         .location__hours ul li {
             display: flex;
             justify-content: space-between;
-            border-bottom: 1px dashed #ddd;
+            border-bottom: 1px dashed rgba(255,255,255,0.1);
             padding: 0.4rem 0;
         }
         .location__hours .hours__time {
-            font-weight: 700;
-        }
-        .location__note {
-            margin-top: 0.75rem;
+            font-weight: 600;
             color: var(--color-primary);
         }
         .location__actions {
             display: flex;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 1rem;
             margin-top: 1.5rem;
+        }
+        .location__note {
+            margin-top: 0.75rem;
+            opacity: 0.7;
         }
 
         /* ===== RESERVAS ===== */
@@ -569,37 +588,42 @@
             align-items: start;
         }
         .reservation__form {
-            background: var(--color-white);
-            padding: 2.5rem;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
             border-radius: var(--radius);
-            box-shadow: var(--shadow);
+            padding: 2rem;
         }
         .form__group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
         }
         .form__group label {
             display: block;
-            font-weight: 700;
-            margin-bottom: 0.4rem;
-            color: var(--color-primary);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.8);
         }
         .form__group input,
         .form__group textarea {
             width: 100%;
-            padding: 0.8rem 1rem;
-            border: 1px solid #b8a694;
+            padding: 0.75rem 1rem;
+            border: 1px solid rgba(255,255,255,0.12);
             border-radius: 8px;
             font-family: var(--font-sans);
             font-size: 1rem;
-            transition: var(--transition);
-            background-color: var(--color-cream);
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.04);
+            background: rgba(255,255,255,0.06);
+            color: #fff;
+            transition: 0.3s;
         }
         .form__group input:focus,
         .form__group textarea:focus {
             outline: none;
-            border-color: var(--color-accent);
-            box-shadow: 0 0 0 3px rgba(200, 155, 110, 0.2);
+            border-color: var(--color-primary);
+            background: rgba(255,255,255,0.08);
+        }
+        .form__group input::placeholder,
+        .form__group textarea::placeholder {
+            color: rgba(255,255,255,0.3);
         }
         .form__group--inline {
             display: grid;
@@ -607,60 +631,54 @@
             gap: 1rem;
         }
         .form__error {
-            color: #d32f2f;
-            font-size: 0.85rem;
-            margin-top: 0.3rem;
+            color: #e74c3c;
+            font-size: 0.8rem;
+            margin-top: 0.2rem;
             display: block;
         }
         .form__success {
             margin-top: 1.5rem;
             padding: 1rem;
-            background: #e8f5e9;
+            background: rgba(46, 125, 50, 0.2);
             border-radius: 8px;
-            color: #2e7d32;
+            color: #81c784;
             text-align: center;
             font-weight: 600;
         }
         .reservation__info {
-            background: var(--color-white);
-            padding: 2.5rem;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
             border-radius: var(--radius);
-            box-shadow: var(--shadow);
+            padding: 2rem;
         }
         .reservation__info h3 {
             font-family: var(--font-serif);
             font-size: 1.6rem;
             margin-bottom: 1rem;
-            color: var(--color-primary);
-        }
-        .reservation__info p {
-            margin-bottom: 0.8rem;
-            font-size: 1.05rem;
         }
         .reservation__info i {
             width: 1.8rem;
-            color: var(--color-accent);
+            color: var(--color-primary);
         }
         .reservation__note {
             margin-top: 1.5rem;
             padding-top: 1.5rem;
-            border-top: 2px dashed #ddd;
-            color: var(--color-primary);
-            font-size: 0.95rem;
+            border-top: 1px dashed rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            opacity: 0.7;
         }
-
         .reservation__form .btn--primary {
             width: 100%;
-            padding: 0.9rem 2rem;
-            font-size: 1.1rem;
-            text-align: center;
+            padding: 0.9rem;
+            font-size: 1rem;
         }
 
         /* ===== FOOTER ===== */
         .footer {
-            background: var(--color-primary);
-            color: var(--color-cream);
-            padding: 2.5rem 0 1.5rem;
+            background: var(--color-bg-dark);
+            color: rgba(255,255,255,0.6);
+            padding: 3rem 0 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
         }
         .footer__inner {
             display: flex;
@@ -673,75 +691,69 @@
             font-family: var(--font-serif);
             font-size: 1.8rem;
             font-weight: 700;
+            color: #fff;
         }
         .footer__brand .logo__highlight {
-            color: var(--color-accent);
+            color: var(--color-primary);
         }
         .footer__social {
             display: flex;
             gap: 1.5rem;
-            font-size: 1.6rem;
+            font-size: 1.4rem;
         }
         .footer__social a {
-            transition: var(--transition);
+            transition: 0.3s;
+            color: rgba(255,255,255,0.5);
         }
         .footer__social a:hover {
-            color: var(--color-accent);
+            color: var(--color-primary);
             transform: translateY(-3px);
         }
         .footer__copy {
-            font-size: 0.9rem;
-            opacity: 0.8;
+            font-size: 0.85rem;
+            opacity: 0.6;
         }
 
-        /* ===== BOTÓN FLOTANTE WHATSAPP ===== */
+        /* ===== WHATSAPP FLOTANTE ===== */
         .whatsapp-float {
             position: fixed;
             bottom: 2rem;
             right: 2rem;
             background-color: var(--color-whatsapp);
-            color: white;
-            width: 64px;
-            height: 64px;
+            color: #fff;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2.8rem;
+            font-size: 2.4rem;
             box-shadow: 0 4px 16px rgba(37, 211, 102, 0.4);
-            transition: all 0.3s ease;
+            transition: 0.3s;
             z-index: 9999;
             text-decoration: none;
         }
         .whatsapp-float:hover {
-            transform: scale(1.12);
+            transform: scale(1.1);
             box-shadow: 0 6px 24px rgba(37, 211, 102, 0.6);
-            color: white;
-        }
-        .whatsapp-float i {
-            line-height: 1;
+            color: #fff;
         }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 992px) {
+            .about__grid,
             .location__grid,
             .reservation__grid {
                 grid-template-columns: 1fr;
             }
+            .about__image {
+                order: -1;
+            }
             .hero__title {
-                font-size: 3rem;
+                font-size: 3.5rem;
             }
             .hero__subtitle {
-                font-size: 1.3rem;
-            }
-            .form__group--inline {
-                grid-template-columns: 1fr 1fr;
-            }
-            .about__lead {
-                font-size: 1.3rem;
-            }
-            .services__grid {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                font-size: 1.4rem;
             }
         }
 
@@ -756,12 +768,12 @@
                 top: 100%;
                 left: 0;
                 right: 0;
-                background: var(--color-white);
+                background: var(--color-bg-dark);
                 padding: 1.5rem;
-                box-shadow: 0 12px 24px rgba(0,0,0,0.1);
-                border-radius: 0 0 var(--radius) var(--radius);
+                box-shadow: 0 12px 24px rgba(0,0,0,0.4);
                 gap: 1rem;
                 text-align: center;
+                border-top: 1px solid rgba(255,255,255,0.05);
             }
             .nav__list.open {
                 display: flex;
@@ -770,108 +782,51 @@
                 flex-wrap: wrap;
             }
             .section__title {
-                font-size: 2.2rem;
+                font-size: 2.4rem;
             }
             .hero__title {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
             }
-            .hero__buttons {
-                flex-direction: column;
+            .hero__buttons .btn {
                 width: 100%;
-            }
-            .hero__cta {
-                width: 100%;
-                text-align: center;
-                display: block;
             }
             .menu__grid {
-                grid-template-columns: 1fr 1fr;
-            }
-            .location__grid {
                 grid-template-columns: 1fr;
             }
-            .whatsapp-float {
-                width: 56px;
-                height: 56px;
-                font-size: 2.4rem;
-                bottom: 1.5rem;
-                right: 1.5rem;
-            }
-            .form__group--inline {
-                grid-template-columns: 1fr;
-            }
-            .reservation__form,
-            .reservation__info {
-                padding: 1.5rem;
-            }
-            .about__badges {
-                flex-direction: column;
-                align-items: center;
-            }
-            .about__badges span {
-                width: 100%;
-                justify-content: center;
-            }
-
             .gallery__grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 0.8rem;
             }
             .gallery__grid img {
                 height: 160px;
             }
+            .form__group--inline {
+                grid-template-columns: 1fr;
+            }
             .services__grid {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
             }
-            .service-item {
-                padding: 1.2rem 0.5rem;
+            .location__grid {
+                grid-template-columns: 1fr;
             }
-            .service-item i {
+            .reservation__grid {
+                grid-template-columns: 1fr;
+            }
+            .whatsapp-float {
+                width: 54px;
+                height: 54px;
                 font-size: 2rem;
-            }
-            .service-item span {
-                font-size: 0.9rem;
+                bottom: 1.2rem;
+                right: 1.2rem;
             }
         }
 
         @media (max-width: 480px) {
-            .menu__grid {
-                grid-template-columns: 1fr;
-            }
-            .whatsapp-float {
-                width: 48px;
-                height: 48px;
-                font-size: 2rem;
-                bottom: 1rem;
-                right: 1rem;
-            }
-            .about__lead {
-                font-size: 1.1rem;
-            }
-            .about__text {
-                font-size: 1rem;
-            }
-
             .gallery__grid {
                 grid-template-columns: 1fr 1fr;
                 gap: 0.6rem;
             }
             .gallery__grid img {
                 height: 130px;
-            }
-
-            .lightbox {
-                padding: 1rem;
-            }
-            .lightbox img {
-                max-width: 95%;
-                max-height: 80%;
-            }
-            .lightbox__close {
-                top: 0.8rem;
-                right: 1.2rem;
-                font-size: 2rem;
             }
             .services__grid {
                 grid-template-columns: 1fr 1fr;
@@ -880,21 +835,17 @@
             .service-item {
                 padding: 1rem 0.5rem;
             }
-            .service-item i {
-                font-size: 1.8rem;
-            }
-            .service-item span {
-                font-size: 0.8rem;
-            }
         }
     </style>
 </head>
 <body>
-    <!-- ===== HEADER STICKY ===== -->
+
+    <!-- ===== HEADER ===== -->
     <header class="header" role="banner">
         <div class="container header__inner">
             <a href="#" class="logo" aria-label="Briyo Café inicio">
                 <img src="img/LOGO-BRIYO.png" alt="Briyo Café">
+                <span>Briyo<span class="logo__highlight">Café</span></span>
             </a>
             <nav class="nav" role="navigation" aria-label="Menú principal">
                 <button class="nav__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Abrir menú">
@@ -914,211 +865,210 @@
         </div>
     </header>
 
-    <main>
-        <!-- ===== HERO ===== -->
-        <section class="hero" id="hero" aria-label="Portada">
-            <div class="hero__overlay"></div>
-            <div class="container hero__content">
-                <h1 class="hero__title">Briyo Café</h1>
-                <p class="hero__subtitle">Desayuno &amp; brunch con <span class="hero__accent">mucho feeling</span> · mucho flow</p>
-                <p class="hero__description">Un oasis de buena comida, gente amable y pasión en los detalles.</p>
-                <div class="hero__buttons">
-                    <a href="#menu" class="btn btn--primary hero__cta">Ver menú</a>
-                    <a href="#reservas" class="btn btn--primary hero__cta">
-                        <i class="fas fa-calendar-check" aria-hidden="true"></i> Reservas
-                    </a>
-                </div>
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero" aria-label="Portada">
+        <div class="hero__overlay"></div>
+        <div class="container hero__content">
+            <div class="hero__badge">🍽️ Desayuno & Brunch</div>
+            <h1 class="hero__title">Briyo <span>Café</span></h1>
+            <p class="hero__subtitle">Mucho <em style="color: var(--color-primary);">feeling</em> · mucho <em style="color: var(--color-primary);">flow</em></p>
+            <p class="hero__description">Un oasis de buena comida, gente amable y pasión en los detalles. Despierta tus sentidos con cada bocado.</p>
+            <div class="hero__buttons">
+                <a href="#menu" class="btn btn--primary">Ver menú</a>
+                <a href="#reservas" class="btn btn--outline-light">Reservar mesa</a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- ===== SOBRE NOSOTROS ===== -->
-        <section class="section about section-hidden" id="sobre" aria-labelledby="about-title">
-            <div class="container">
-                <div class="about__content">
-                    <h2 class="section__title" id="about-title">Sobre nosotros</h2>
-                    <p class="about__lead">Briyo Café es un oasis de buena comida, gente amable y pasión en los detalles.</p>
-                    <div class="about__text">
-                        <p>Briyo Café es un oasis de buena comida, gente amable y pasión en los detalles. Ubicados en el corazón de León, Guanajuato, abrimos nuestras puertas todos los días de 8:00 a.m. a 2:00 p.m. para ofrecerte una experiencia única de desayuno y brunch.</p>
-                        <p>Nuestra cocina es auténtica y hecha con el corazón: preparamos todo desde cero, seleccionando los ingredientes más frescos y locales para despertar tus sentidos con cada bocado. Nuestro menú es tan variado como tu antojo. Encontrarás desde los clásicos chilaquiles y enchiladas hasta nuestros famosos sándwiches, pan francés, omelettes y una amplia selección de bebidas, incluyendo opciones con alcohol. Cada platillo está pensado para compartir y disfrutar.</p>
-                        <p>Pero Briyo es más que solo comida. Queremos que te sientas como en casa, por eso nuestro espacio está lleno de detalles que te harán sonreír, como nuestras tazas y platos con frases motivadoras. Y porque creemos que la buena mesa se disfruta en familia, contamos con un área de juegos increíble para los más pequeños. Además, somos pet-friendly, así que tu compañero de cuatro patas también es bienvenido. Te esperamos para que vivas una experiencia llena de flow, feeling y el mejor café de la ciudad.</p>
-                    </div>
+    <!-- ===== SOBRE NOSOTROS ===== -->
+    <section class="section section--light" id="sobre" aria-labelledby="about-title">
+        <div class="container">
+            <div class="about__grid">
+                <div class="about__text">
+                    <h2 class="section__title section__title--dark" id="about-title">Sobre nosotros</h2>
+                    <p style="font-size: 1.2rem; font-weight: 600; color: var(--color-primary-dark); margin-bottom: 1rem;">Briyo Café es un oasis de buena comida, gente amable y pasión en los detalles.</p>
+                    <p>Ubicados en el corazón de León, Guanajuato, abrimos nuestras puertas todos los días de 8:00 a.m. a 2:00 p.m. para ofrecerte una experiencia única de desayuno y brunch.</p>
+                    <p>Nuestra cocina es auténtica y hecha con el corazón: preparamos todo desde cero, seleccionando los ingredientes más frescos y locales para despertar tus sentidos con cada bocado.</p>
+                    <p>Somos pet-friendly, tenemos área de juegos para los más pequeños y un ambiente lleno de detalles que te harán sonreír.</p>
                     <div class="about__badges">
-                       
+                        <span><i class="fas fa-paw"></i> Pet‑friendly</span>
+                        <span><i class="fas fa-mug-hot"></i> Café de especialidad</span>
+                        <span><i class="fas fa-heart"></i> Hecho con pasión</span>
+                    </div>
+                </div>
+                <div class="about__image">
+                   <img src="img/briyo1.jpeg" alt="Briyo Café" loading="lazy">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== MENÚ ===== -->
+    <section class="section section--dark" id="menu" aria-labelledby="menu-title">
+        <div class="container">
+            <h2 class="section__title section__title--light" id="menu-title">Nuestro menú</h2>
+            <p class="section__subtitle section__subtitle--light">Delicias elaboradas para seres brillantes que aman comer delicioso</p>
+            <div class="menu__filters" role="tablist" aria-label="Filtrar por categoría">
+                <button class="menu__filter-btn active" data-category="all" role="tab" aria-selected="true">Todos</button>
+                <button class="menu__filter-btn" data-category="chilaquiles" role="tab" aria-selected="false">Chilaquiles</button>
+                <button class="menu__filter-btn" data-category="sandwiches" role="tab" aria-selected="false">Sándwiches</button>
+                <button class="menu__filter-btn" data-category="mexa" role="tab" aria-selected="false">Lo Mexa</button>
+                <button class="menu__filter-btn" data-category="jugos" role="tab" aria-selected="false">Jugos & Smoothies</button>
+                <button class="menu__filter-btn" data-category="cafeteria" role="tab" aria-selected="false">Cafetería</button>
+                <button class="menu__filter-btn" data-category="dulce" role="tab" aria-selected="false">Lo Dulce</button>
+                <button class="menu__filter-btn" data-category="flow" role="tab" aria-selected="false">Flow Ligero</button>
+            </div>
+            <div class="menu__grid" id="menuGrid" role="tabpanel"></div>
+        </div>
+    </section>
+
+    <!-- ===== GALERÍA ===== -->
+    <section class="section section--light" id="galeria" aria-labelledby="gallery-title">
+        <div class="container">
+            <h2 class="section__title section__title--dark" id="gallery-title">Galería</h2>
+            <p class="section__subtitle section__subtitle--dark">Un vistazo a nuestra esencia visual</p>
+            <div class="gallery__grid" id="galleryGrid"></div>
+        </div>
+    </section>
+
+    <!-- ===== SERVICIOS ===== -->
+    <section class="section section--dark" id="servicios" aria-labelledby="services-title">
+        <div class="container">
+            <h2 class="section__title section__title--light" id="services-title">Servicios</h2>
+            <p class="section__subtitle section__subtitle--light">Todo lo que ofrecemos para hacer tu visita inolvidable</p>
+            <div class="services__grid">
+                <div class="service-item"><i class="fas fa-wheelchair"></i><span>Acceso silla de ruedas</span></div>
+                <div class="service-item"><i class="fas fa-dog"></i><span>Apto para perros</span></div>
+                <div class="service-item"><i class="fas fa-child"></i><span>Área infantil</span></div>
+                <div class="service-item"><i class="fas fa-tree"></i><span>Asientos al aire libre</span></div>
+                <div class="service-item"><i class="fas fa-glass-cheers"></i><span>Bar</span></div>
+                <div class="service-item"><i class="fas fa-beer"></i><span>Cervezas</span></div>
+                <div class="service-item"><i class="fas fa-truck"></i><span>Entrega a domicilio</span></div>
+                <div class="service-item"><i class="fas fa-parking"></i><span>Estacionamiento propio</span></div>
+                <div class="service-item"><i class="fas fa-wine-bottle"></i><span>Licores</span></div>
+                <div class="service-item"><i class="fas fa-calendar-check"></i><span>Reservaciones</span></div>
+                <div class="service-item"><i class="fas fa-baby"></i><span>Servicio de niñera</span></div>
+                <div class="service-item"><i class="fas fa-shopping-bag"></i><span>Servicio para llevar</span></div>
+                <div class="service-item"><i class="fas fa-chair"></i><span>Sillas para niños</span></div>
+                <div class="service-item"><i class="fas fa-credit-card"></i><span>Tarjeta de Crédito</span></div>
+                <div class="service-item"><i class="fas fa-umbrella-beach"></i><span>Terraza</span></div>
+                <div class="service-item"><i class="fas fa-parking"></i><span>Estacionamiento con valet</span></div>
+                <div class="service-item"><i class="fas fa-wifi"></i><span>Wifi gratis</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== UBICACIÓN ===== -->
+    <section class="section section--light" id="ubicacion" aria-labelledby="location-title">
+        <div class="container">
+            <h2 class="section__title section__title--dark" id="location-title">Ubicación &amp; horarios</h2>
+            <p class="section__subtitle section__subtitle--dark">Ven a conocernos</p>
+            <div class="location__grid">
+                <div class="location__map">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d391.19686141956254!2d-101.62029739746527!3d21.124016174292642!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842bbf158d02a9af%3A0x6d4ae270ac64ce80!2sBriyo%20Cafe!5e0!3m2!1ses-419!2smx!4v1783883497375!5m2!1ses-419!2smx" 
+                        width="100%" 
+                        height="400" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        title="Ubicación de Briyo Café"
+                        aria-label="Mapa de ubicación"
+                    ></iframe>
+                </div>
+                <div class="location__info">
+                    <div>
+                        <h3><i class="fas fa-map-pin" style="color: var(--color-primary-dark);"></i> Dirección</h3>
+                        <p>Blvrd Vicente Valtierra 7168,<br>Fracciones Cañada de Alfaro,<br>37299 León de los Aldama, Gto.</p>
+                        <p><i class="fas fa-phone" style="color: var(--color-primary-dark);"></i> <a href="tel:+524775643198">477 564 3198</a></p>
+                        <p><i class="fas fa-envelope" style="color: var(--color-primary-dark);"></i> <a href="mailto:briyocafe@gmail.com">briyocafe@gmail.com</a></p>
+                    </div>
+                    <div>
+                        <h3><i class="far fa-clock" style="color: var(--color-primary-dark);"></i> Horarios</h3>
+                        <ul>
+                            <li><span>Lunes a domingo</span> <span class="hours__time">8:00 a.m. – 2:00 p.m.</span></li>
+                        </ul>
+                        <p class="location__note"><i class="fas fa-check-circle" style="color: var(--color-primary-dark);"></i> Abierto todos los días</p>
+                    </div>
+                    <div class="location__actions">
+                        <a href="https://api.whatsapp.com/send/?phone=5214775643198&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="btn btn--whatsapp">
+                            <i class="fab fa-whatsapp"></i> Pedir por WhatsApp
+                        </a>
+                        <a href="https://maps.app.goo.gl/EmrSGAnH141j9CSR6" target="_blank" rel="noopener noreferrer" class="btn btn--dark">Cómo llegar</a>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- ===== MENÚ ===== -->
-        <section class="section menu section-hidden" id="menu" aria-labelledby="menu-title">
-            <div class="container">
-                <h2 class="section__title" id="menu-title">Nuestro menú</h2>
-                <p class="section__subtitle">Delicias elaboradas para seres brillantes que aman comer delicioso</p>
-                <div class="menu__filters" role="tablist" aria-label="Filtrar por categoría">
-                    <button class="menu__filter-btn active" data-category="all" role="tab" aria-selected="true">Todos</button>
-                    <button class="menu__filter-btn" data-category="chilaquiles" role="tab" aria-selected="false">Chilaquiles</button>
-                    <button class="menu__filter-btn" data-category="sandwiches" role="tab" aria-selected="false">Sándwiches</button>
-                    <button class="menu__filter-btn" data-category="mexa" role="tab" aria-selected="false">Lo Mexa</button>
-                    <button class="menu__filter-btn" data-category="jugos" role="tab" aria-selected="false">Jugos & Smoothies</button>
-                    <button class="menu__filter-btn" data-category="cafeteria" role="tab" aria-selected="false">Cafetería</button>
-                    <button class="menu__filter-btn" data-category="dulce" role="tab" aria-selected="false">Lo Dulce</button>
-                    <button class="menu__filter-btn" data-category="flow" role="tab" aria-selected="false">Flow Ligero</button>
-                </div>
-                <div class="menu__grid" id="menuGrid" role="tabpanel">
-                    <!-- Los items se inyectan con JS -->
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== GALERÍA ===== -->
-        <section class="section gallery section-hidden" id="galeria" aria-labelledby="gallery-title">
-            <div class="container">
-                <h2 class="section__title" id="gallery-title">Galería</h2>
-                <p class="section__subtitle">Un vistazo a nuestra esencia visual</p>
-                <div class="gallery__grid" id="galleryGrid">
-                    <!-- Imágenes inyectadas con JS -->
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== SERVICIOS ===== -->
-        <section class="section services section-hidden" id="servicios" aria-labelledby="services-title">
-            <div class="container">
-                <h2 class="section__title" id="services-title">Servicios</h2>
-                <p class="section__subtitle">Todo lo que ofrecemos para hacer tu visita inolvidable</p>
-                <div class="services__grid">
-                    <div class="service-item"><i class="fas fa-wheelchair"></i><span>Acceso para silla de ruedas</span></div>
-                    <div class="service-item"><i class="fas fa-dog"></i><span>Apto para perros</span></div>
-                    <div class="service-item"><i class="fas fa-child"></i><span>Área infantil</span></div>
-                    <div class="service-item"><i class="fas fa-tree"></i><span>Asientos al aire libre</span></div>
-                    <div class="service-item"><i class="fas fa-glass-cheers"></i><span>Bar</span></div>
-                    <div class="service-item"><i class="fas fa-beer"></i><span>Cervezas</span></div>
-                    <div class="service-item"><i class="fas fa-truck"></i><span>Entrega a domicilio</span></div>
-                    <div class="service-item"><i class="fas fa-parking"></i><span>Estacionamiento propio</span></div>
-                    <div class="service-item"><i class="fas fa-wine-bottle"></i><span>Licores</span></div>
-                    <div class="service-item"><i class="fas fa-calendar-check"></i><span>Reservaciones</span></div>
-                    <div class="service-item"><i class="fas fa-baby"></i><span>Servicio de niñera</span></div>
-                    <div class="service-item"><i class="fas fa-shopping-bag"></i><span>Servicio para llevar</span></div>
-                    <div class="service-item"><i class="fas fa-chair"></i><span>Sillas para niños</span></div>
-                    <div class="service-item"><i class="fas fa-credit-card"></i><span>Tarjeta de Crédito</span></div>
-                    <div class="service-item"><i class="fas fa-umbrella-beach"></i><span>Terraza</span></div>
-                    <div class="service-item"><i class="fas fa-parking"></i><span>Estacionamiento con valet</span></div>
-                    <div class="service-item"><i class="fas fa-wifi"></i><span>Wifi gratis</span></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== UBICACIÓN Y HORARIOS ===== -->
-        <section class="section location section-hidden" id="ubicacion" aria-labelledby="location-title">
-            <div class="container">
-                <h2 class="section__title" id="location-title">Ubicación &amp; horarios</h2>
-                <div class="location__grid">
-                    <div class="location__map">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d391.19686141956254!2d-101.62029739746527!3d21.124016174292642!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x842bbf158d02a9af%3A0x6d4ae270ac64ce80!2sBriyo%20Cafe!5e0!3m2!1ses-419!2smx!4v1783883497375!5m2!1ses-419!2smx" 
-                            width="100%" 
-                            height="400" 
-                            style="border:0;" 
-                            allowfullscreen="" 
-                            loading="lazy" 
-                            referrerpolicy="strict-origin-when-cross-origin"
-                            title="Ubicación de Briyo Café en Google Maps"
-                            aria-label="Mapa de ubicación de Briyo Café"
-                        ></iframe>
+    <!-- ===== RESERVAS ===== -->
+    <section class="section section--dark" id="reservas" aria-labelledby="reservas-title">
+        <div class="container">
+            <h2 class="section__title section__title--light" id="reservas-title">Reservas</h2>
+            <p class="section__subtitle section__subtitle--light">Reserva tu mesa y te esperamos con mucho flow</p>
+            <div class="reservation__grid">
+                <form class="reservation__form" id="reservationForm" novalidate>
+                    <div class="form__group">
+                        <label for="nombreReserva">Nombre completo <span aria-hidden="true">*</span></label>
+                        <input type="text" id="nombreReserva" name="nombre" placeholder="Tu nombre" required>
+                        <span class="form__error" id="nombreReservaError"></span>
                     </div>
-                    <div class="location__info">
-                        <div class="location__address">
-                            <h3><i class="fas fa-map-pin" aria-hidden="true"></i> Dirección</h3>
-                            <p>Blvrd Vicente Valtierra 7168,<br>Fracciones Cañada de Alfaro,<br>37299 León de los Aldama, Gto.</p>
-                            <p><i class="fas fa-phone" aria-hidden="true"></i> <a href="tel:+524775643198">477 564 3198</a>
-                            <p><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:briyocafe@gmail.com">briyocafe@gmail.com</a></p>
+                    <div class="form__group">
+                        <label for="telefonoReserva">Teléfono <span aria-hidden="true">*</span></label>
+                        <input type="tel" id="telefonoReserva" name="telefono" placeholder="477 123 4567" required>
+                        <span class="form__error" id="telefonoReservaError"></span>
+                    </div>
+                    <div class="form__group">
+                        <label for="emailReserva">Correo electrónico</label>
+                        <input type="email" id="emailReserva" name="email" placeholder="tucorreo@ejemplo.com">
+                        <span class="form__error" id="emailReservaError"></span>
+                    </div>
+                    <div class="form__group form__group--inline">
+                        <div>
+                            <label for="fechaReserva">Fecha <span aria-hidden="true">*</span></label>
+                            <input type="date" id="fechaReserva" name="fecha" required>
+                            <span class="form__error" id="fechaReservaError"></span>
                         </div>
-                        <div class="location__hours">
-                            <h3><i class="far fa-clock" aria-hidden="true"></i> Horarios</h3>
-                            <ul>
-                                <li><span>Lunes a domingo</span> <span class="hours__time">8:00 a.m. – 2:00 p.m.</span></li>
-                            </ul>
-                            <p class="location__note"><i class="fas fa-check-circle" aria-hidden="true"></i> Abierto todos los días</p>
+                        <div>
+                            <label for="horaReserva">Hora <span aria-hidden="true">*</span></label>
+                            <input type="time" id="horaReserva" name="hora" required>
+                            <span class="form__error" id="horaReservaError"></span>
                         </div>
-                        <div class="location__actions">
-                            <a href="https://api.whatsapp.com/send/?phone=5214775643198&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer" class="btn btn--whatsapp">
-                                <i class="fab fa-whatsapp" aria-hidden="true"></i> Pedir por WhatsApp
-                            </a>
-                            <a href="https://maps.app.goo.gl/EmrSGAnH141j9CSR6" target="_blank" rel="noopener noreferrer" class="btn btn--secondary">Cómo llegar</a>
+                        <div>
+                            <label for="personasReserva">Personas <span aria-hidden="true">*</span></label>
+                            <input type="number" id="personasReserva" name="personas" min="1" value="2" required>
+                            <span class="form__error" id="personasReservaError"></span>
                         </div>
+                    </div>
+                    <div class="form__group">
+                        <label for="comentariosReserva">Comentarios adicionales</label>
+                        <textarea id="comentariosReserva" name="comentarios" rows="3" placeholder="Algún requerimiento especial..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn--primary">Enviar reserva <i class="fab fa-whatsapp"></i></button>
+                    <div class="form__success" id="reservationSuccess" style="display:none;">
+                        <i class="fas fa-check-circle"></i> ¡Reserva enviada! Serás redirigido a WhatsApp para confirmar.
+                    </div>
+                </form>
+                <div class="reservation__info">
+                    <h3>¿Prefieres contactarnos directamente?</h3>
+                    <p><i class="fab fa-whatsapp"></i> <a href="https://api.whatsapp.com/send/?phone=5214775643198&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer">+52 477 564 3198</a></p>
+                    <p><i class="fas fa-phone"></i> <a href="tel:+524775643198">477 564 3198</a></p>
+                    <p><i class="fas fa-envelope"></i> <a href="mailto:briyocafe@gmail.com">briyocafe@gmail.com</a></p>
+                    <div class="reservation__note">
+                        <i class="fas fa-info-circle"></i> Al enviar esta reserva, serás redirigido a WhatsApp para confirmar los detalles.
                     </div>
                 </div>
             </div>
-        </section>
-
-        <!-- ===== RESERVAS ===== -->
-        <section class="section reservation section-hidden" id="reservas" aria-labelledby="reservas-title">
-            <div class="container">
-                <h2 class="section__title" id="reservas-title">Reservas</h2>
-                <p class="section__subtitle">Reserva tu mesa y te esperamos con mucho flow</p>
-                <div class="reservation__grid">
-                    <form class="reservation__form" id="reservationForm" novalidate>
-                        <div class="form__group">
-                            <label for="nombreReserva">Nombre completo <span aria-hidden="true">*</span></label>
-                            <input type="text" id="nombreReserva" name="nombre" placeholder="Tu nombre" required aria-required="true">
-                            <span class="form__error" id="nombreReservaError"></span>
-                        </div>
-                        <div class="form__group">
-                            <label for="telefonoReserva">Teléfono <span aria-hidden="true">*</span></label>
-                            <input type="tel" id="telefonoReserva" name="telefono" placeholder="477 123 4567" required aria-required="true">
-                            <span class="form__error" id="telefonoReservaError"></span>
-                        </div>
-                        <div class="form__group">
-                            <label for="emailReserva">Correo electrónico</label>
-                            <input type="email" id="emailReserva" name="email" placeholder="tucorreo@ejemplo.com">
-                            <span class="form__error" id="emailReservaError"></span>
-                        </div>
-                        <div class="form__group form__group--inline">
-                            <div class="form__group">
-                                <label for="fechaReserva">Fecha <span aria-hidden="true">*</span></label>
-                                <input type="date" id="fechaReserva" name="fecha" required aria-required="true">
-                                <span class="form__error" id="fechaReservaError"></span>
-                            </div>
-                            <div class="form__group">
-                                <label for="horaReserva">Hora <span aria-hidden="true">*</span></label>
-                                <input type="time" id="horaReserva" name="hora" required aria-required="true">
-                                <span class="form__error" id="horaReservaError"></span>
-                            </div>
-                            <div class="form__group">
-                                <label for="personasReserva">Personas <span aria-hidden="true">*</span></label>
-                                <input type="number" id="personasReserva" name="personas" min="1" value="2" required aria-required="true">
-                                <span class="form__error" id="personasReservaError"></span>
-                            </div>
-                        </div>
-                        <div class="form__group">
-                            <label for="comentariosReserva">Comentarios adicionales</label>
-                            <textarea id="comentariosReserva" name="comentarios" rows="3" placeholder="Algún requerimiento especial..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn--primary">Enviar reserva <i class="fab fa-whatsapp" aria-hidden="true"></i></button>
-                        <div class="form__success" id="reservationSuccess" aria-live="polite" style="display:none;">
-                            <i class="fas fa-check-circle" aria-hidden="true"></i> ¡Reserva enviada! Serás redirigido a WhatsApp para confirmar.
-                        </div>
-                    </form>
-                    <div class="reservation__info">
-                        <h3>¿Prefieres contactarnos directamente?</h3>
-                        <p><i class="fab fa-whatsapp" aria-hidden="true"></i> <a href="https://api.whatsapp.com/send/?phone=5214775643198&text&type=phone_number&app_absent=0" target="_blank" rel="noopener noreferrer">+52 477 564 3198</a></p>
-                        <p><i class="fas fa-phone" aria-hidden="true"></i> <a href="tel:+524775643198">477 564 3198</a></p>
-                        <p><i class="fas fa-envelope" aria-hidden="true"></i> <a href="mailto:briyocafe@gmail.com">briyocafe@gmail.com</a></p>
-                        <div class="reservation__note">
-                            <p><i class="fas fa-info-circle" aria-hidden="true"></i> Al enviar esta reserva, serás redirigido a WhatsApp para confirmar los detalles.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
     <!-- ===== FOOTER ===== -->
     <footer class="footer" role="contentinfo">
         <div class="container footer__inner">
             <div class="footer__brand">
                 <span class="logo__text">Briyo<span class="logo__highlight">Café</span></span>
-                <p>Desayuno &amp; brunch con mucho feeling · mucho flow</p>
+                <p style="margin-top: 0.2rem; opacity: 0.7;">Desayuno &amp; brunch con mucho feeling · mucho flow</p>
             </div>
             <div class="footer__social">
                 <a href="https://instagram.com/briyo.mx" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -1127,12 +1077,12 @@
             </div>
             <div class="footer__copy">
                 <p>&copy; 2026 Briyo Café. Todos los derechos reservados.</p>
-                <p><small>Hecho con <i class="fas fa-heart" aria-hidden="true"></i> en León, Gto.</small></p>
+                <p><small>Hecho con <i class="fas fa-heart" style="color: var(--color-primary);"></i> en León, Gto.</small></p>
             </div>
         </div>
     </footer>
 
-    <!-- ===== BOTÓN FLOTANTE WHATSAPP ===== -->
+    <!-- ===== WHATSAPP FLOAT ===== -->
     <a href="https://api.whatsapp.com/send/?phone=5214775643198&text&type=phone_number&app_absent=0" 
        class="whatsapp-float" 
        target="_blank" 
@@ -1143,401 +1093,300 @@
 
     <!-- ===== LIGHTBOX ===== -->
     <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Ampliación de imagen">
-        <button class="lightbox__close" id="lightboxClose" aria-label="Cerrar imagen">&times;</button>
+        <button class="lightbox__close" id="lightboxClose">&times;</button>
         <img src="" alt="Imagen ampliada" id="lightboxImg">
     </div>
 
-    <!-- ===== SCRIPTS INLINE ===== -->
+    <!-- ===== SCRIPTS ===== -->
     <script>
         // ============================================================
-        //  Briyo Café - Menú actualizado
+        //  Briyo Café - Nuevo diseño
         // ============================================================
 
-        console.log('🚀 Iniciando Briyo Café...');
+        console.log('🚀 Briyo Café — diseño renovado');
 
-        // Función para mostrar secciones visibles al cargar
-        function showVisibleSections() {
-            var sections = document.querySelectorAll('.section-hidden');
-            sections.forEach(function(section) {
-                var rect = section.getBoundingClientRect();
-                var windowHeight = window.innerHeight || document.documentElement.clientHeight;
-                if (rect.top < windowHeight - 100 && rect.bottom > 100) {
-                    section.classList.remove('section-hidden');
-                    section.classList.add('section-visible');
-                }
+        // ---------- MENÚ HAMBURGUESA ----------
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        if (navToggle && navMenu) {
+            navToggle.addEventListener('click', function() {
+                const expanded = this.getAttribute('aria-expanded') === 'true' ? false : true;
+                this.setAttribute('aria-expanded', expanded);
+                navMenu.classList.toggle('open');
+            });
+
+            navMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('open');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                });
             });
         }
 
-        try {
-            // ---------- MENÚ HAMBURGUESA ----------
-            const navToggle = document.getElementById('navToggle');
-            const navMenu = document.getElementById('navMenu');
+        // ---------- DATOS DEL MENÚ ----------
+        const menuItems = [
+            // Chilaquiles
+            { id: 1, name: 'Chilaquiles Clásicos', category: 'chilaquiles', description: 'Servidos con frijol refrito, queso fresco, crema, cilantro, cebolla morada y chicharrón de jalapeño casero.', price: '$179' },
+            { id: 2, name: 'Chilaquiles Suizos', category: 'chilaquiles', description: 'Salsa verde suiza (con crema), servidos con frijol refrito, queso fresco, crema, cilantro, cebolla morada y chicharrón de jalapeño.', price: '$233' },
+            { id: 3, name: 'Chilaquiles con chicharrón regio', category: 'chilaquiles', description: 'Igual que los clásicos pero con extra de Chicharrón regio. *No incluye pan', price: '$239' },
+            { id: 4, name: 'Chilaquiles con cochinita', category: 'chilaquiles', description: 'Totopos con salsa a elegir y porción de cochinita hecha en casa.', price: '$226' },
+            { id: 5, name: 'Chilaquiles con mole', category: 'chilaquiles', description: 'Totopos con salsa de mole, pollo. Servido con ajonjolí, queso fresco, crema, cebolla, cilantro.', price: '$245' },
+            { id: 6, name: 'Chilaquiles poblanos', category: 'chilaquiles', description: 'Salsa a base de chile poblano, pimientos rostizados, frijoles negros, crema, queso fresco.', price: '$189' },
+            { id: 7, name: 'Birriaquiles', category: 'chilaquiles', description: 'Salsa habanera y birria hecha en casa, frijoles negros, crema, queso fresco.', price: '$220' },
+            { id: 8, name: 'Chilaquiles con arrachera', category: 'chilaquiles', description: 'Con arrachera y aguacate, frijoles negros, crema, queso fresco.', price: '$233' },
+            { id: 9, name: 'Chilaquiles con milanesa', category: 'chilaquiles', description: 'Milanesa empanizada, frijoles negros, crema, queso fresco, cebolla.', price: '$220' },
 
-            if (navToggle && navMenu) {
-                navToggle.addEventListener('click', function() {
-                    const expanded = this.getAttribute('aria-expanded') === 'true' ? false : true;
-                    this.setAttribute('aria-expanded', expanded);
-                    navMenu.classList.toggle('open');
+            // Sándwiches
+            { id: 10, name: 'Sándwich Loreto', category: 'sandwiches', description: 'Croque monsieur de jamón de pierna con queso, bañado en salsa de quesos.', price: '$252' },
+            { id: 11, name: 'Sándwich Mazunte', category: 'sandwiches', description: 'Rib eye a baja temperatura con adobo, queso manchego, relish de pepinillos, mostaza y cebolla frita.', price: '$309' },
+            { id: 12, name: 'Sándwich Todo Santos', category: 'sandwiches', description: 'Pechuga de pollo marinada en pesto, pimientos asados, costra de queso Gouda, aguacate y espinaca.', price: '$279' },
+            { id: 13, name: 'Sándwich Puerto Escondido', category: 'sandwiches', description: 'Jamón de pavo, guacamole, mix de quesos y mayo morita. Picante 🌶️', price: '$246' },
+            { id: 14, name: 'Sándwich San José', category: 'sandwiches', description: 'Pan brioche con omelette de queso americano, tocino caramelizado y chicharrón de chile.', price: '$253' },
+
+            // Lo Mexa
+            { id: 15, name: 'Flautas Briyo', category: 'mexa', description: 'Cuatro flautas de estofado de rib eye con salsa borracha, guacamole, queso fresco y crema.', price: '$228' },
+            { id: 16, name: 'Omelette Cactus', category: 'mexa', description: 'Relleno de queso y jamón de pavo sobre salsa de tomate rostizado, con aguacate y cebolla morada, acompañado de frijoles.', price: '$213' },
+            { id: 17, name: 'Burrito mexicali', category: 'mexa', description: 'Burrito de harina con huevo con tocino, frijol refrito, guacamole, chicharrón de jalapeño, chips de papa y camote.', price: '$220' },
+            { id: 18, name: 'Quesabirrias', category: 'mexa', description: 'Quesadilla con birria adentro, guacamole, consomé y cebolla xnipec.', price: '$239' },
+
+            // Jugos & Smoothies
+            { id: 19, name: 'Jugo Verde', category: 'jugos', description: 'Naranja, pepino, apio y espinaca.', price: '$89' },
+            { id: 20, name: 'Jugo de Naranja', category: 'jugos', description: 'Fresco y hecho al momento.', price: '$85' },
+            { id: 21, name: 'Jugo Combinado', category: 'jugos', description: 'Naranja y zanahoria.', price: '$89' },
+            { id: 22, name: 'Jugo de Zanahoria', category: 'jugos', description: 'La combinación ideal de sabor y frescura.', price: '$89' },
+            { id: 23, name: 'Smoothie Briyo', category: 'jugos', description: 'Maracuyá, guayaba y naranja.', price: '$116' },
+            { id: 24, name: 'Smoothie Ohana', category: 'jugos', description: 'Horchata, canela y shot de café.', price: '$116' },
+            { id: 25, name: 'Amorosa', category: 'jugos', description: 'Frutos rojos con chía y miel de agave.', price: '$129' },
+            { id: 26, name: 'Mango Meneado', category: 'jugos', description: 'Mango, guayaba y yogurt griego. Base de leche vegetal.', price: '$129' },
+            { id: 27, name: 'Diosa Rosa', category: 'jugos', description: 'Pitahaya con toque cítrico. Base agua.', price: '$116' },
+            { id: 28, name: 'Nuz y Dátil', category: 'jugos', description: 'Plátano, nuez y dátil. Base de leche vegetal.', price: '$116' },
+
+            // Cafetería
+            { id: 29, name: 'Café Americano', category: 'cafeteria', description: 'Café de Chiapas recién extraído.', price: '$85' },
+            { id: 30, name: 'Cappuccino', category: 'cafeteria', description: 'Espresso de especialidad, leche al vapor, nube cremosa.', price: '$96' },
+            { id: 31, name: 'Latte Clásico', category: 'cafeteria', description: 'Disfrútala hoy, repítela mañana.', price: '$96' },
+            { id: 32, name: 'Moka Oaxaqueño', category: 'cafeteria', description: 'Café y chocolate.', price: '$116' },
+            { id: 33, name: 'Chocolate Oaxaqueño', category: 'cafeteria', description: 'Chocolate artesanal, frío o caliente, con leche a tu preferencia.', price: '$109' },
+            { id: 34, name: 'Latte Matcha', category: 'cafeteria', description: 'Latte verde con matcha.', price: '$103' },
+            { id: 35, name: 'Taro Latte', category: 'cafeteria', description: 'Latte suave y dulce con taro morado.', price: '$103' },
+            { id: 36, name: 'Chai Latte', category: 'cafeteria', description: 'Chai clásico endulzado con miel en polvo.', price: '$103' },
+            { id: 37, name: 'Latte Pistache', category: 'cafeteria', description: 'Café frío con nube de pistache.', price: '$155' },
+
+            // Dulce
+            { id: 38, name: 'Concha Rellena', category: 'dulce', description: 'Rellena con nata de mascarpone, acompañada de fresas.', price: '$149' },
+            { id: 39, name: 'Playa', category: 'dulce', description: 'Pan francés brioche con compota de frutos rojos.', price: '$213' },
+            { id: 40, name: 'Pan Francés de la Abuela', category: 'dulce', description: 'Pan brioche con azúcar y canela, arroz con leche y lechera.', price: '$239' },
+
+            // Flow Ligero
+            { id: 41, name: 'Omelette Olivo', category: 'flow', description: 'Claras de huevo, espárragos, jitomate rostizado relleno de queso panela, pimientos rostizados, frijoles.', price: '$213' },
+            { id: 42, name: 'Omelette Suculento', category: 'flow', description: 'Claras de huevo, espinacas, champiñones al ajillo con panela, pan de masa madre, guacamole y ensalada.', price: '$219' }
+        ];
+
+        const menuGrid = document.getElementById('menuGrid');
+        const filterBtns = document.querySelectorAll('.menu__filter-btn');
+
+        function renderMenu(category = 'all') {
+            const filtered = category === 'all' ? menuItems : menuItems.filter(item => item.category === category);
+            if (filtered.length === 0) {
+                menuGrid.innerHTML = '<p style="text-align:center; padding:2rem; color: rgba(255,255,255,0.5);">No hay elementos en esta categoría</p>';
+                return;
+            }
+            menuGrid.innerHTML = filtered.map(item => `
+                <div class="menu__item" data-category="${item.category}">
+                    <div class="menu__item-body">
+                        <span class="category">${item.category}</span>
+                        <h3>${item.name}</h3>
+                        <p class="description">${item.description}</p>
+                        <p class="price">${item.price}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                renderMenu(btn.dataset.category);
+            });
+        });
+        renderMenu('all');
+
+        // ---------- GALERÍA ----------
+        const galleryImages = [
+            'img/comida1.jpeg',
+            'img/comida2.jpeg',
+            'img/comida3.jpeg',
+            'img/comida4.jpeg',
+            'img/comida5.jpeg',
+            'img/comida6.jpeg',
+            'img/comida7.jpeg',
+            'img/comida8.jpeg',
+            'img/comida9.jpeg',
+            'img/comida10.jpeg',
+            'img/comida11.jpeg',
+            'img/comida12.jpeg',
+            'img/juegos.jpeg'
+        ];
+
+        const galleryGrid = document.getElementById('galleryGrid');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxClose = document.getElementById('lightboxClose');
+
+        if (galleryGrid) {
+            galleryGrid.innerHTML = galleryImages.map(url => 
+                `<img src="${url}" alt="Galería Briyo Café" loading="lazy">`
+            ).join('');
+
+            galleryGrid.querySelectorAll('img').forEach(img => {
+                img.addEventListener('click', () => {
+                    lightboxImg.src = img.src;
+                    lightbox.classList.add('active');
+                    document.body.style.overflow = 'hidden';
                 });
+            });
+        }
 
-                navMenu.querySelectorAll('a').forEach(function(link) {
-                    link.addEventListener('click', function() {
-                        navMenu.classList.remove('open');
-                        navToggle.setAttribute('aria-expanded', 'false');
-                    });
-                });
-                console.log('✅ Menú hamburguesa activo');
-            }
-
-            // ---------- DATOS DEL MENÚ (actualizado) ----------
-            var menuItems = [
-                // === CHILAQUILES ===
-                { id: 1, name: 'Chilaquiles Clásicos', category: 'chilaquiles', description: 'Servidos con frijol refrito, queso fresco, crema, cilantro, cebolla morada y chicharrón de jalapeño casero. Elige tu salsa favorita', price: '$179' },
-                { id: 2, name: 'Chilaquiles Suizos', category: 'chilaquiles', description: 'Salsa verde suiza (con crema), servidos con frijol refrito, queso fresco, crema, cilantro, cebolla morada y chicharrón de jalapeño.', price: '$233' },
-                { id: 3, name: 'Chilaquiles con chicharrón regio', category: 'chilaquiles', description: 'Igual que los clásicos pero con extra de Chicharrón regio. Te recomendamos con salsa verde uff!! *El platillo no incluye la pieza de pan', price: '$239' },
-                { id: 4, name: 'Chilaquiles con cochinita', category: 'chilaquiles', description: 'Los totopos de siempre peeeero con salsa de tu elección y acompañados de una porción de cochinita hecha en casa :)', price: '$226' },
-                { id: 5, name: 'Chilaquiles con mole', category: 'chilaquiles', description: 'Totopos con salsa de mole, pollo. Servido con ajonjolí, queso fresco, crema, cebolla, cilantro, chicharrón de jalapeño.', price: '$245' },
-                { id: 6, name: 'Chilaquiles poblanos', category: 'chilaquiles', description: 'Con salsa a base de chile poblano y encima una porción de pimientos rostizados, servidos con frijoles negros, crema, queso fresco y chicharrón de jalapeño.', price: '$189' },
-                { id: 7, name: 'Birriaquiles', category: 'chilaquiles', description: 'Salsa habanera y una porción de birria hecha en casa, servidos con frijoles negros, crema, queso fresco y chicharrón de jalapeños.', price: '$220' },
-                { id: 8, name: 'Chilaquiles con arrachera', category: 'chilaquiles', description: 'Con una porción de arrachera y aguacate. Salsa a elegir, servidos con frijoles negros, crema, queso fresco y chicharrón de jalapeño.', price: '$233' },
-                { id: 9, name: 'Chilaquiles con milanesa', category: 'chilaquiles', description: 'Elige tu salsa. Llevan una porción de milanesa empanizada, servidos con frijoles negros, crema, queso fresco, cebolla y chicharrón de jalapeño.', price: '$220' },
-
-                // === SÁNDWICHES ===
-                { id: 10, name: 'Sándwich Loreto', category: 'sandwiches', description: 'El croque monsieur de jamón de pierna con queso, bañado en salsa de quesos.', price: '$252' },
-                { id: 11, name: 'Sándwich Mazunte', category: 'sandwiches', description: 'De rib eye cocinado a baja temperatura con adobo, queso manchego, relish de pepinillos, mostaza y cebolla frita.', price: '$309' },
-                { id: 12, name: 'Sándwich Todo Santos', category: 'sandwiches', description: 'Pechuga de pollo marinada en pesto con pimientos asados, costra de queso Gouda, aguacate y espinaca.', price: '$279' },
-                { id: 13, name: 'Sándwich Puerto Escondido', category: 'sandwiches', description: 'Jamón de pavo, guacamole, mix de quesos y mayo morita. Picante 🌶️', price: '$246' },
-                { id: 14, name: 'Sándwich San José', category: 'sandwiches', description: 'Pan brioche. Adentro un omelette con queso americano, tocino caramelizado y chicharrón de chile.', price: '$253' },
-
-                // === LO MEXA ===
-                { id: 15, name: 'Flautas Briyo', category: 'mexa', description: 'Cuatro flautas rellenas de estofado de rib eye con una salsa borracha, acompañada de guacamole, queso fresco y crema.', price: '$228' },
-                { id: 16, name: 'Omelette Cactus', category: 'mexa', description: 'Relleno de queso y jamón de pavo sobre un espejo de salsa de tomate rostizado, servido con aguacate y cebolla morada, acompañado de frijoles.', price: '$213' },
-                { id: 17, name: 'Burrito mexicali', category: 'mexa', description: 'Burrito de harina relleno de huevo con tocino, decorado con frijol refrito, guacamole y chicharrón de jalapeño, acompañado de chips de papa y camote. Popular', price: '$220' },
-                { id: 18, name: 'Quesabirrias', category: 'mexa', description: 'Una mega quesadilla con birria adentro. Se acompaña con guacamole, consomé y cebolla xnipec.', price: '$239' },
-
-                // === JUGOS & SMOOTHIES (incluye los que estaban en "Por Menos de $100") ===
-                { id: 19, name: 'Jugo Verde', category: 'jugos', description: 'Eres de los que se preocupa por su salud y este jugo a base de naranja, pepino, apio y espinaca es ideal para ti.', price: '$89' },
-                { id: 20, name: 'Jugo de Naranja', category: 'jugos', description: 'brillante, Fresco & hecho al momento.', price: '$85' },
-                { id: 21, name: 'Juego Combinado', category: 'jugos', description: 'Jugo fresco de naranja y zanahoria. Pa\' andar con toda la alegría !', price: '$89' },
-                { id: 22, name: 'Jugo de Zanahoria', category: 'jugos', description: 'La combinación ideal de sabor y frescura.', price: '$89' },
-                { id: 23, name: 'Smoothie Briyo', category: 'jugos', description: 'Maracuyá, guayaba y naranja.', price: '$116' },
-                { id: 24, name: 'Smoothie Ohana', category: 'jugos', description: 'Horchata, canela y shot de café.', price: '$116' },
-                { id: 25, name: 'Amorosa', category: 'jugos', description: 'Mezcla de frutos rojos con chía y miel de agave.', price: '$129' },
-                { id: 26, name: 'Mango Meneado', category: 'jugos', description: 'Mango, guayaba y yogurt griego. Base de leche vegetal.', price: '$129' },
-                { id: 27, name: 'Diosa Rosa', category: 'jugos', description: 'Pitahaya con un toque cítrico. Base agua.', price: '$116' },
-                { id: 28, name: 'Nuz y Dátil', category: 'jugos', description: 'Lleva plátano, nuez y dátil. Base de leche vegetal.', price: '$116' },
-
-                // === CAFETERÍA & BEBIDAS ===
-                { id: 29, name: 'Café Americano', category: 'cafeteria', description: 'Café de chiapas recién extraído.', price: '$85' },
-                { id: 30, name: 'Cappuccino', category: 'cafeteria', description: 'Nuestro capuccino está preparado con espresso de especialidad y leche al vapor, coronado con una nube cremosa que te hará briyar desde el primer sorbo. Popular', price: '$96' },
-                { id: 31, name: 'Latte Clásico', category: 'cafeteria', description: 'Disfrútala hoy, repítela mañana.', price: '$96' },
-                { id: 32, name: 'Moka Oaxaqueño', category: 'cafeteria', description: 'Café y chocolate.', price: '$116' },
-                { id: 33, name: 'Chocolate Oaxaqueño', category: 'cafeteria', description: 'Chocolate Oaxaqueño auténtico. Disfrútalo frío o caliente, siempre cremoso y con leche de tu preferencia. Un apapacho delicioso que te conecta con tus raíces y te pone de buenas.', price: '$109' },
-                { id: 34, name: 'Latte Matcha', category: 'cafeteria', description: 'Un latte verde y cremoso con el toque zen del matcha.', price: '$103' },
-                { id: 35, name: 'Taro latte', category: 'cafeteria', description: 'Latte suave y dulce con el sabor único del taro morado.', price: '$103' },
-                { id: 36, name: 'Chai latte', category: 'cafeteria', description: 'Latte de chai clásico, pero un toque brillante: viene endulzado con miel en polvo ! un toque único.', price: '$103' },
-                { id: 37, name: 'Latte Pistache', category: 'cafeteria', description: 'Café frío con nube de pistache.', price: '$155' },
-
-                // === LO DULCE ===
-                { id: 38, name: 'Concha Rellena', category: 'dulce', description: 'Rellena con nuestra "nata" de mascarpone. Acompañada con fresas. Una delicia que no encontrarás en otro lado :)', price: '$149' },
-                { id: 39, name: 'Playa', category: 'dulce', description: 'Pan francés de pan brioche con un extra de compota casera de frutos rojos.', price: '$213' },
-                { id: 40, name: 'Pan Francés de la Abuela', category: 'dulce', description: 'Inspirado en todas nuestras abuelas. Pan brioche de mantequilla con azúcar y canela. Arroz con leche encima, coronado con lechera.', price: '$239' },
-
-                // === FLOW LIGERO ===
-                { id: 41, name: 'Omelette Olivo', category: 'flow', description: 'Nuestra versión light de claras de huevos, espárragos, jitomate rostizado relleno de queso panela y un mix de pimientos rostizados, acompañado de frijoles.', price: '$213' },
-                { id: 42, name: 'Omelette Suculento', category: 'flow', description: 'Éste tiene espinacas y va relleno de champiñones al ajillo con panela. Es de puras claras. Se acompaña de pan de masa madre, guacamole y ensalada. Popular', price: '$219' }
-            ];
-
-            var menuGrid = document.getElementById('menuGrid');
-            var filterBtns = document.querySelectorAll('.menu__filter-btn');
-
-            if (!menuGrid) {
-                console.error('❌ No se encontró #menuGrid');
-            } else {
-                console.log('✅ #menuGrid encontrado');
-            }
-
-            function renderMenu(category) {
-                category = category || 'all';
-                try {
-                    var filtered = (category === 'all') ? menuItems : menuItems.filter(function(item) {
-                        return item.category === category;
-                    });
-
-                    if (filtered.length === 0) {
-                        menuGrid.innerHTML = '<p style="text-align:center; padding:2rem; color:var(--color-secondary);">No hay elementos en esta categoría</p>';
-                    } else {
-                        var html = '';
-                        filtered.forEach(function(item) {
-                            html += '<div class="menu__item" data-category="' + item.category + '">';
-                            html += '  <div class="menu__item-body">';
-                            html += '    <span class="category">' + item.category + '</span>';
-                            html += '    <h3>' + item.name + '</h3>';
-                            html += '    <p class="description">' + item.description + '</p>';
-                            html += '    <p class="price">' + item.price + '</p>';
-                            html += '  </div>';
-                            html += '</div>';
-                        });
-                        menuGrid.innerHTML = html;
-                    }
-                    console.log('✅ Menú renderizado para: ' + category);
-                } catch (err) {
-                    console.error('❌ Error en renderMenu:', err);
-                    menuGrid.innerHTML = '<p style="color:red; text-align:center;">Error al cargar el menú: ' + err.message + '</p>';
-                }
-            }
-
-            if (filterBtns.length > 0) {
-                filterBtns.forEach(function(btn) {
-                    btn.addEventListener('click', function() {
-                        filterBtns.forEach(function(b) {
-                            b.classList.remove('active');
-                            b.setAttribute('aria-selected', 'false');
-                        });
-                        this.classList.add('active');
-                        this.setAttribute('aria-selected', 'true');
-                        var category = this.getAttribute('data-category');
-                        renderMenu(category);
-                    });
-                });
-                console.log('✅ Filtros configurados');
-            }
-
-            renderMenu('all');
-
-            // ---------- GALERÍA EN GRID CON LIGHTBOX ----------
-            var galleryImages = [
-                'img/comida1.jpeg',
-                'img/comida2.jpeg',
-                'img/comida3.jpeg',
-                'img/comida4.jpeg',
-                'img/comida5.jpeg',
-                'img/comida6.jpeg',
-                'img/comida7.jpeg',
-                'img/comida8.jpeg',
-                'img/comida9.jpeg',
-                'img/comida10.jpeg',
-                'img/comida11.jpeg',
-                'img/comida12.jpeg',
-                'img/comida13.jpeg',
-                'img/comida14.jpeg',
-                'img/juegos.jpeg'
-            ];
-
-            var galleryGrid = document.getElementById('galleryGrid');
-            var lightbox = document.getElementById('lightbox');
-            var lightboxImg = document.getElementById('lightboxImg');
-            var lightboxClose = document.getElementById('lightboxClose');
-
-            if (galleryGrid) {
-                try {
-                    var galleryHtml = '';
-                    galleryImages.forEach(function(url) {
-                        galleryHtml += '<img src="' + url + '" alt="Galería Briyo Café" loading="lazy" decoding="async">';
-                    });
-                    galleryGrid.innerHTML = galleryHtml;
-                    console.log('✅ Galería renderizada con ' + galleryImages.length + ' imágenes');
-
-                    // Asignar evento click a cada imagen para abrir lightbox
-                    var images = galleryGrid.querySelectorAll('img');
-                    images.forEach(function(img) {
-                        img.addEventListener('click', function(e) {
-                            e.stopPropagation();
-                            lightboxImg.src = this.src;
-                            lightbox.classList.add('active');
-                            document.body.style.overflow = 'hidden';
-                        });
-                    });
-
-                } catch (err) {
-                    console.error('❌ Error al renderizar galería:', err);
-                    galleryGrid.innerHTML = '<p style="color:red; text-align:center;">Error al cargar la galería: ' + err.message + '</p>';
-                }
-            } else {
-                console.error('❌ No se encontró #galleryGrid');
-            }
-
-            // Cerrar lightbox
-            if (lightboxClose) {
-                lightboxClose.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    lightbox.classList.remove('active');
-                    document.body.style.overflow = '';
-                });
-            }
-            if (lightbox) {
-                lightbox.addEventListener('click', function(e) {
-                    if (e.target === this) {
-                        lightbox.classList.remove('active');
-                        document.body.style.overflow = '';
-                    }
-                });
-            }
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+        // Cerrar lightbox
+        if (lightboxClose) {
+            lightboxClose.addEventListener('click', () => {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        }
+        if (lightbox) {
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox) {
                     lightbox.classList.remove('active');
                     document.body.style.overflow = '';
                 }
             });
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
 
-            // ---------- SISTEMA DE RESERVAS ----------
-            var reservationForm = document.getElementById('reservationForm');
-            if (reservationForm) {
-                reservationForm.addEventListener('submit', function(e) {
+        // ---------- RESERVAS ----------
+        const reservationForm = document.getElementById('reservationForm');
+        if (reservationForm) {
+            reservationForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                // Limpiar errores
+                document.querySelectorAll('.form__error').forEach(el => el.textContent = '');
+
+                const nombre = document.getElementById('nombreReserva').value.trim();
+                const telefono = document.getElementById('telefonoReserva').value.trim();
+                const email = document.getElementById('emailReserva').value.trim();
+                const fecha = document.getElementById('fechaReserva').value;
+                const hora = document.getElementById('horaReserva').value;
+                const personas = document.getElementById('personasReserva').value.trim();
+                const comentarios = document.getElementById('comentariosReserva').value.trim();
+
+                let isValid = true;
+
+                if (nombre.length < 2) {
+                    document.getElementById('nombreReservaError').textContent = 'Ingresa tu nombre completo.';
+                    isValid = false;
+                }
+                if (telefono.replace(/\D/g, '').length < 10) {
+                    document.getElementById('telefonoReservaError').textContent = 'Ingresa un teléfono válido (10 dígitos).';
+                    isValid = false;
+                }
+                if (email && !email.includes('@')) {
+                    document.getElementById('emailReservaError').textContent = 'Correo inválido.';
+                    isValid = false;
+                }
+                const hoy = new Date();
+                hoy.setHours(0,0,0,0);
+                const fechaSeleccionada = new Date(fecha + 'T00:00:00');
+                if (!fecha || fechaSeleccionada < hoy) {
+                    document.getElementById('fechaReservaError').textContent = 'Selecciona una fecha válida (hoy o futura).';
+                    isValid = false;
+                }
+                if (!hora) {
+                    document.getElementById('horaReservaError').textContent = 'Selecciona una hora.';
+                    isValid = false;
+                }
+                if (parseInt(personas) < 1) {
+                    document.getElementById('personasReservaError').textContent = 'Mínimo 1 persona.';
+                    isValid = false;
+                }
+                if (!isValid) return;
+
+                // Formatear fecha y hora
+                const dias = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+                const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+                const fechaObj = new Date(fecha + 'T00:00:00');
+                const fechaFormateada = `${dias[fechaObj.getDay()]}, ${fechaObj.getDate()} de ${meses[fechaObj.getMonth()]}`;
+                const [hh, mm] = hora.split(':');
+                const hh12 = hh % 12 || 12;
+                const ampm = hh >= 12 ? 'p.m.' : 'a.m.';
+                const horaFormateada = `${hh12}:${mm} ${ampm}`;
+
+                const mensaje = `☕ ¡Solicitud de Reserva desde la Web!%0A%0A` +
+                    `Nombre: ${encodeURIComponent(nombre)}%0A` +
+                    `Fecha: ${encodeURIComponent(fechaFormateada)}%0A` +
+                    `Hora: ${encodeURIComponent(horaFormateada)}%0A` +
+                    `Personas: ${encodeURIComponent(personas)}%0A` +
+                    `Teléfono: ${encodeURIComponent(telefono)}%0A` +
+                    (email ? `Correo: ${encodeURIComponent(email)}%0A` : '') +
+                    (comentarios ? `Comentarios: ${encodeURIComponent(comentarios)}` : '');
+
+                window.open(`https://api.whatsapp.com/send/?phone=5214775643198&text=${mensaje}&type=phone_number&app_absent=0`, '_blank');
+
+                const successDiv = document.getElementById('reservationSuccess');
+                successDiv.style.display = 'block';
+                setTimeout(() => successDiv.style.display = 'none', 8000);
+            });
+        }
+
+        // ---------- SCROLL SUAVE ----------
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
                     e.preventDefault();
-
-                    var errorSpans = this.querySelectorAll('.form__error');
-                    errorSpans.forEach(function(span) { span.textContent = ''; });
-
-                    var nombre = document.getElementById('nombreReserva').value.trim();
-                    var telefono = document.getElementById('telefonoReserva').value.trim();
-                    var email = document.getElementById('emailReserva').value.trim();
-                    var fecha = document.getElementById('fechaReserva').value;
-                    var hora = document.getElementById('horaReserva').value;
-                    var personas = document.getElementById('personasReserva').value.trim();
-                    var comentarios = document.getElementById('comentariosReserva').value.trim();
-
-                    var isValid = true;
-
-                    if (nombre.length < 2) {
-                        document.getElementById('nombreReservaError').textContent = 'Ingresa tu nombre completo.';
-                        isValid = false;
-                    }
-
-                    var telefonoLimpio = telefono.replace(/\D/g, '');
-                    if (telefonoLimpio.length < 10) {
-                        document.getElementById('telefonoReservaError').textContent = 'Ingresa un número de teléfono válido (10 dígitos).';
-                        isValid = false;
-                    }
-
-                    if (email && !email.includes('@')) {
-                        document.getElementById('emailReservaError').textContent = 'Correo inválido.';
-                        isValid = false;
-                    }
-
-                    var hoy = new Date();
-                    hoy.setHours(0, 0, 0, 0);
-                    var fechaSeleccionada = new Date(fecha + 'T00:00:00');
-                    if (!fecha || fechaSeleccionada < hoy) {
-                        document.getElementById('fechaReservaError').textContent = 'Selecciona una fecha válida (hoy o futura).';
-                        isValid = false;
-                    }
-
-                    if (!hora) {
-                        document.getElementById('horaReservaError').textContent = 'Selecciona una hora.';
-                        isValid = false;
-                    }
-
-                    var numPersonas = parseInt(personas);
-                    if (isNaN(numPersonas) || numPersonas < 1) {
-                        document.getElementById('personasReservaError').textContent = 'Mínimo 1 persona.';
-                        isValid = false;
-                    }
-
-                    if (!isValid) {
-                        return;
-                    }
-
-                    // Formatear fecha
-                    var diasSemana = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-                    var meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
-                    var fechaObj = new Date(fecha + 'T00:00:00');
-                    var diaSemana = diasSemana[fechaObj.getDay()];
-                    var dia = fechaObj.getDate();
-                    var mes = meses[fechaObj.getMonth()];
-                    var fechaFormateada = diaSemana + ', ' + dia + ' de ' + mes;
-
-                    // Formatear hora
-                    var partesHora = hora.split(':');
-                    var horaNum = parseInt(partesHora[0]);
-                    var minutos = partesHora[1];
-                    var ampm = horaNum >= 12 ? 'p.m.' : 'a.m.';
-                    var hora12 = horaNum % 12;
-                    if (hora12 === 0) hora12 = 12;
-                    var horaFormateada = hora12 + ':' + minutos + ' ' + ampm;
-
-                    // Construir mensaje para WhatsApp
-                    var mensaje = '☕ ¡Solicitud de Reserva desde la Web!%0A%0A';
-                    mensaje += 'Nombre: ' + encodeURIComponent(nombre) + '%0A';
-                    mensaje += 'Fecha: ' + encodeURIComponent(fechaFormateada) + '%0A';
-                    mensaje += 'Hora: ' + encodeURIComponent(horaFormateada) + '%0A';
-                    mensaje += 'Personas: ' + encodeURIComponent(personas) + '%0A';
-                    mensaje += 'Teléfono: ' + encodeURIComponent(telefono) + '%0A';
-                    if (email) {
-                        mensaje += 'Correo: ' + encodeURIComponent(email) + '%0A';
-                    }
-                    if (comentarios) {
-                        mensaje += 'Comentarios: ' + encodeURIComponent(comentarios);
-                    }
-
-                    var url = 'https://api.whatsapp.com/send/?phone=5214775643198&text=' + mensaje + '&type=phone_number&app_absent=0';
-                    window.open(url, '_blank');
-
-                    var successDiv = document.getElementById('reservationSuccess');
-                    successDiv.style.display = 'block';
-                    setTimeout(function() {
-                        successDiv.style.display = 'none';
-                    }, 8000);
-                });
-            }
-
-            // ---------- SCROLL SUAVE ----------
-            document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-                anchor.addEventListener('click', function(e) {
-                    var targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    var target = document.querySelector(targetId);
-                    if (target) {
-                        e.preventDefault();
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                });
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             });
-            console.log('✅ Scroll suave activo');
+        });
 
-            // ---------- ANIMACIONES CON CLASSES ----------
-            var sections = document.querySelectorAll('.section-hidden');
+        // ---------- ANIMACIONES (Intersection Observer) ----------
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
 
-            if (sections.length > 0 && 'IntersectionObserver' in window) {
-                var observer = new IntersectionObserver(function(entries) {
-                    entries.forEach(function(entry) {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.remove('section-hidden');
-                            entry.target.classList.add('section-visible');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.15 });
+        sections.forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+            observer.observe(section);
+        });
 
-                sections.forEach(function(section) {
-                    observer.observe(section);
-                });
-                console.log('✅ Intersection Observer configurado');
+        // Forzar visibilidad inicial en secciones ya visibles
+        setTimeout(() => {
+            sections.forEach(section => {
+                const rect = section.getBoundingClientRect();
+                if (rect.top < window.innerHeight * 0.85) {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }
+            });
+        }, 200);
 
-                setTimeout(showVisibleSections, 100);
-                setTimeout(showVisibleSections, 500);
-                window.addEventListener('load', function() {
-                    setTimeout(showVisibleSections, 200);
-                });
-                window.addEventListener('resize', showVisibleSections);
-                window.addEventListener('scroll', showVisibleSections);
-            } else {
-                sections.forEach(function(section) {
-                    section.classList.remove('section-hidden');
-                    section.classList.add('section-visible');
-                });
-                console.warn('⚠️ IntersectionObserver no soportado, se muestran todas las secciones');
-            }
-
-            console.log('✨ Briyo Café · Todo cargado correctamente');
-
-        } catch (error) {
-            console.error('❌ Error general:', error);
-            var errorDiv = document.createElement('div');
-            errorDiv.style.cssText = 'background:#ffebee; color:#c62828; padding:1rem; margin:1rem; border-radius:8px; border:1px solid #ef9a9a; text-align:center;';
-            errorDiv.innerHTML = '<strong>⚠️ Error al cargar la página:</strong> ' + error.message + '. Revisa la consola para más detalles.';
-            document.body.prepend(errorDiv);
-        }
+        console.log('✨ Briyo Café · Diseño renovado listo');
     </script>
 </body>
 </html>
