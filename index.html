@@ -8,7 +8,7 @@
     <meta name="description" content="Briyo Café es un oasis de buena comida, gente amable y pasión en los detalles. Desayuno y brunch con mucho feeling en León, Gto.">
     <meta name="keywords" content="cafetería, brunch, desayuno, León, Guanajuato, café, comida">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>">
-    <!-- Google Fonts (Inter + Playfair Display para detalles) -->
+    <!-- Google Fonts (Inter + Playfair Display) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,700&display=swap" rel="stylesheet">
@@ -288,6 +288,10 @@
         /* ===== SECCIONES GENERALES ===== */
         .section {
             padding: 5rem 0;
+            /* Las secciones son visibles por defecto, sin opacidad 0 */
+            opacity: 1;
+            transform: none;
+            transition: opacity 0.7s ease, transform 0.7s ease;
         }
         .section--dark {
             background-color: var(--color-bg-dark);
@@ -296,6 +300,16 @@
         .section--light {
             background-color: var(--color-bg-light);
             color: var(--color-text-dark);
+        }
+
+        /* Clase que se añade para la animación de entrada (solo si el observador funciona) */
+        .section-hidden {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .section-visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .section__title {
@@ -897,7 +911,7 @@
                     </div>
                 </div>
                 <div class="about__image">
-                   <img src="img/briyo1.jpeg" alt="Briyo Café" loading="lazy">
+                    <img src="img/interior.jpg" alt="Interior de Briyo Café" loading="lazy">
                 </div>
             </div>
         </div>
@@ -1097,296 +1111,293 @@
         <img src="" alt="Imagen ampliada" id="lightboxImg">
     </div>
 
-    <!-- ===== SCRIPTS ===== -->
+    <!-- ===== SCRIPTS CORREGIDOS ===== -->
     <script>
-        // ============================================================
-        //  Briyo Café - Nuevo diseño
-        // ============================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Briyo Café — DOM listo');
 
-        console.log('🚀 Briyo Café — diseño renovado');
+            // ---------- MENÚ HAMBURGUESA ----------
+            const navToggle = document.getElementById('navToggle');
+            const navMenu = document.getElementById('navMenu');
 
-        // ---------- MENÚ HAMBURGUESA ----------
-        const navToggle = document.getElementById('navToggle');
-        const navMenu = document.getElementById('navMenu');
-
-        if (navToggle && navMenu) {
-            navToggle.addEventListener('click', function() {
-                const expanded = this.getAttribute('aria-expanded') === 'true' ? false : true;
-                this.setAttribute('aria-expanded', expanded);
-                navMenu.classList.toggle('open');
-            });
-
-            navMenu.querySelectorAll('a').forEach(link => {
-                link.addEventListener('click', () => {
-                    navMenu.classList.remove('open');
-                    navToggle.setAttribute('aria-expanded', 'false');
+            if (navToggle && navMenu) {
+                navToggle.addEventListener('click', function() {
+                    const expanded = this.getAttribute('aria-expanded') === 'true' ? false : true;
+                    this.setAttribute('aria-expanded', expanded);
+                    navMenu.classList.toggle('open');
                 });
-            });
-        }
 
-        // ---------- DATOS DEL MENÚ ----------
-        const menuItems = [
-            // Chilaquiles
-            { id: 1, name: 'Chilaquiles Clásicos', category: 'chilaquiles', description: 'Servidos con frijol refrito, queso fresco, crema, cilantro, cebolla morada y chicharrón de jalapeño casero.', price: '$179' },
-            { id: 2, name: 'Chilaquiles Suizos', category: 'chilaquiles', description: 'Salsa verde suiza (con crema), servidos con frijol refrito, queso fresco, crema, cilantro, cebolla morada y chicharrón de jalapeño.', price: '$233' },
-            { id: 3, name: 'Chilaquiles con chicharrón regio', category: 'chilaquiles', description: 'Igual que los clásicos pero con extra de Chicharrón regio. *No incluye pan', price: '$239' },
-            { id: 4, name: 'Chilaquiles con cochinita', category: 'chilaquiles', description: 'Totopos con salsa a elegir y porción de cochinita hecha en casa.', price: '$226' },
-            { id: 5, name: 'Chilaquiles con mole', category: 'chilaquiles', description: 'Totopos con salsa de mole, pollo. Servido con ajonjolí, queso fresco, crema, cebolla, cilantro.', price: '$245' },
-            { id: 6, name: 'Chilaquiles poblanos', category: 'chilaquiles', description: 'Salsa a base de chile poblano, pimientos rostizados, frijoles negros, crema, queso fresco.', price: '$189' },
-            { id: 7, name: 'Birriaquiles', category: 'chilaquiles', description: 'Salsa habanera y birria hecha en casa, frijoles negros, crema, queso fresco.', price: '$220' },
-            { id: 8, name: 'Chilaquiles con arrachera', category: 'chilaquiles', description: 'Con arrachera y aguacate, frijoles negros, crema, queso fresco.', price: '$233' },
-            { id: 9, name: 'Chilaquiles con milanesa', category: 'chilaquiles', description: 'Milanesa empanizada, frijoles negros, crema, queso fresco, cebolla.', price: '$220' },
-
-            // Sándwiches
-            { id: 10, name: 'Sándwich Loreto', category: 'sandwiches', description: 'Croque monsieur de jamón de pierna con queso, bañado en salsa de quesos.', price: '$252' },
-            { id: 11, name: 'Sándwich Mazunte', category: 'sandwiches', description: 'Rib eye a baja temperatura con adobo, queso manchego, relish de pepinillos, mostaza y cebolla frita.', price: '$309' },
-            { id: 12, name: 'Sándwich Todo Santos', category: 'sandwiches', description: 'Pechuga de pollo marinada en pesto, pimientos asados, costra de queso Gouda, aguacate y espinaca.', price: '$279' },
-            { id: 13, name: 'Sándwich Puerto Escondido', category: 'sandwiches', description: 'Jamón de pavo, guacamole, mix de quesos y mayo morita. Picante 🌶️', price: '$246' },
-            { id: 14, name: 'Sándwich San José', category: 'sandwiches', description: 'Pan brioche con omelette de queso americano, tocino caramelizado y chicharrón de chile.', price: '$253' },
-
-            // Lo Mexa
-            { id: 15, name: 'Flautas Briyo', category: 'mexa', description: 'Cuatro flautas de estofado de rib eye con salsa borracha, guacamole, queso fresco y crema.', price: '$228' },
-            { id: 16, name: 'Omelette Cactus', category: 'mexa', description: 'Relleno de queso y jamón de pavo sobre salsa de tomate rostizado, con aguacate y cebolla morada, acompañado de frijoles.', price: '$213' },
-            { id: 17, name: 'Burrito mexicali', category: 'mexa', description: 'Burrito de harina con huevo con tocino, frijol refrito, guacamole, chicharrón de jalapeño, chips de papa y camote.', price: '$220' },
-            { id: 18, name: 'Quesabirrias', category: 'mexa', description: 'Quesadilla con birria adentro, guacamole, consomé y cebolla xnipec.', price: '$239' },
-
-            // Jugos & Smoothies
-            { id: 19, name: 'Jugo Verde', category: 'jugos', description: 'Naranja, pepino, apio y espinaca.', price: '$89' },
-            { id: 20, name: 'Jugo de Naranja', category: 'jugos', description: 'Fresco y hecho al momento.', price: '$85' },
-            { id: 21, name: 'Jugo Combinado', category: 'jugos', description: 'Naranja y zanahoria.', price: '$89' },
-            { id: 22, name: 'Jugo de Zanahoria', category: 'jugos', description: 'La combinación ideal de sabor y frescura.', price: '$89' },
-            { id: 23, name: 'Smoothie Briyo', category: 'jugos', description: 'Maracuyá, guayaba y naranja.', price: '$116' },
-            { id: 24, name: 'Smoothie Ohana', category: 'jugos', description: 'Horchata, canela y shot de café.', price: '$116' },
-            { id: 25, name: 'Amorosa', category: 'jugos', description: 'Frutos rojos con chía y miel de agave.', price: '$129' },
-            { id: 26, name: 'Mango Meneado', category: 'jugos', description: 'Mango, guayaba y yogurt griego. Base de leche vegetal.', price: '$129' },
-            { id: 27, name: 'Diosa Rosa', category: 'jugos', description: 'Pitahaya con toque cítrico. Base agua.', price: '$116' },
-            { id: 28, name: 'Nuz y Dátil', category: 'jugos', description: 'Plátano, nuez y dátil. Base de leche vegetal.', price: '$116' },
-
-            // Cafetería
-            { id: 29, name: 'Café Americano', category: 'cafeteria', description: 'Café de Chiapas recién extraído.', price: '$85' },
-            { id: 30, name: 'Cappuccino', category: 'cafeteria', description: 'Espresso de especialidad, leche al vapor, nube cremosa.', price: '$96' },
-            { id: 31, name: 'Latte Clásico', category: 'cafeteria', description: 'Disfrútala hoy, repítela mañana.', price: '$96' },
-            { id: 32, name: 'Moka Oaxaqueño', category: 'cafeteria', description: 'Café y chocolate.', price: '$116' },
-            { id: 33, name: 'Chocolate Oaxaqueño', category: 'cafeteria', description: 'Chocolate artesanal, frío o caliente, con leche a tu preferencia.', price: '$109' },
-            { id: 34, name: 'Latte Matcha', category: 'cafeteria', description: 'Latte verde con matcha.', price: '$103' },
-            { id: 35, name: 'Taro Latte', category: 'cafeteria', description: 'Latte suave y dulce con taro morado.', price: '$103' },
-            { id: 36, name: 'Chai Latte', category: 'cafeteria', description: 'Chai clásico endulzado con miel en polvo.', price: '$103' },
-            { id: 37, name: 'Latte Pistache', category: 'cafeteria', description: 'Café frío con nube de pistache.', price: '$155' },
-
-            // Dulce
-            { id: 38, name: 'Concha Rellena', category: 'dulce', description: 'Rellena con nata de mascarpone, acompañada de fresas.', price: '$149' },
-            { id: 39, name: 'Playa', category: 'dulce', description: 'Pan francés brioche con compota de frutos rojos.', price: '$213' },
-            { id: 40, name: 'Pan Francés de la Abuela', category: 'dulce', description: 'Pan brioche con azúcar y canela, arroz con leche y lechera.', price: '$239' },
-
-            // Flow Ligero
-            { id: 41, name: 'Omelette Olivo', category: 'flow', description: 'Claras de huevo, espárragos, jitomate rostizado relleno de queso panela, pimientos rostizados, frijoles.', price: '$213' },
-            { id: 42, name: 'Omelette Suculento', category: 'flow', description: 'Claras de huevo, espinacas, champiñones al ajillo con panela, pan de masa madre, guacamole y ensalada.', price: '$219' }
-        ];
-
-        const menuGrid = document.getElementById('menuGrid');
-        const filterBtns = document.querySelectorAll('.menu__filter-btn');
-
-        function renderMenu(category = 'all') {
-            const filtered = category === 'all' ? menuItems : menuItems.filter(item => item.category === category);
-            if (filtered.length === 0) {
-                menuGrid.innerHTML = '<p style="text-align:center; padding:2rem; color: rgba(255,255,255,0.5);">No hay elementos en esta categoría</p>';
-                return;
+                navMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navMenu.classList.remove('open');
+                        navToggle.setAttribute('aria-expanded', 'false');
+                    });
+                });
             }
-            menuGrid.innerHTML = filtered.map(item => `
-                <div class="menu__item" data-category="${item.category}">
-                    <div class="menu__item-body">
-                        <span class="category">${item.category}</span>
-                        <h3>${item.name}</h3>
-                        <p class="description">${item.description}</p>
-                        <p class="price">${item.price}</p>
+
+            // ---------- DATOS DEL MENÚ (igual que antes) ----------
+            const menuItems = [
+                { id: 1, name: 'Chilaquiles Clásicos', category: 'chilaquiles', description: 'Servidos con frijol refrito, queso fresco, crema, cilantro, cebolla morada y chicharrón de jalapeño casero.', price: '$179' },
+                { id: 2, name: 'Chilaquiles Suizos', category: 'chilaquiles', description: 'Salsa verde suiza (con crema), servidos con frijol refrito, queso fresco, crema, cilantro, cebolla morada y chicharrón de jalapeño.', price: '$233' },
+                { id: 3, name: 'Chilaquiles con chicharrón regio', category: 'chilaquiles', description: 'Igual que los clásicos pero con extra de Chicharrón regio. *No incluye pan', price: '$239' },
+                { id: 4, name: 'Chilaquiles con cochinita', category: 'chilaquiles', description: 'Totopos con salsa a elegir y porción de cochinita hecha en casa.', price: '$226' },
+                { id: 5, name: 'Chilaquiles con mole', category: 'chilaquiles', description: 'Totopos con salsa de mole, pollo. Servido con ajonjolí, queso fresco, crema, cebolla, cilantro.', price: '$245' },
+                { id: 6, name: 'Chilaquiles poblanos', category: 'chilaquiles', description: 'Salsa a base de chile poblano, pimientos rostizados, frijoles negros, crema, queso fresco.', price: '$189' },
+                { id: 7, name: 'Birriaquiles', category: 'chilaquiles', description: 'Salsa habanera y birria hecha en casa, frijoles negros, crema, queso fresco.', price: '$220' },
+                { id: 8, name: 'Chilaquiles con arrachera', category: 'chilaquiles', description: 'Con arrachera y aguacate, frijoles negros, crema, queso fresco.', price: '$233' },
+                { id: 9, name: 'Chilaquiles con milanesa', category: 'chilaquiles', description: 'Milanesa empanizada, frijoles negros, crema, queso fresco, cebolla.', price: '$220' },
+                { id: 10, name: 'Sándwich Loreto', category: 'sandwiches', description: 'Croque monsieur de jamón de pierna con queso, bañado en salsa de quesos.', price: '$252' },
+                { id: 11, name: 'Sándwich Mazunte', category: 'sandwiches', description: 'Rib eye a baja temperatura con adobo, queso manchego, relish de pepinillos, mostaza y cebolla frita.', price: '$309' },
+                { id: 12, name: 'Sándwich Todo Santos', category: 'sandwiches', description: 'Pechuga de pollo marinada en pesto, pimientos asados, costra de queso Gouda, aguacate y espinaca.', price: '$279' },
+                { id: 13, name: 'Sándwich Puerto Escondido', category: 'sandwiches', description: 'Jamón de pavo, guacamole, mix de quesos y mayo morita. Picante 🌶️', price: '$246' },
+                { id: 14, name: 'Sándwich San José', category: 'sandwiches', description: 'Pan brioche con omelette de queso americano, tocino caramelizado y chicharrón de chile.', price: '$253' },
+                { id: 15, name: 'Flautas Briyo', category: 'mexa', description: 'Cuatro flautas de estofado de rib eye con salsa borracha, guacamole, queso fresco y crema.', price: '$228' },
+                { id: 16, name: 'Omelette Cactus', category: 'mexa', description: 'Relleno de queso y jamón de pavo sobre salsa de tomate rostizado, con aguacate y cebolla morada, acompañado de frijoles.', price: '$213' },
+                { id: 17, name: 'Burrito mexicali', category: 'mexa', description: 'Burrito de harina con huevo con tocino, frijol refrito, guacamole, chicharrón de jalapeño, chips de papa y camote.', price: '$220' },
+                { id: 18, name: 'Quesabirrias', category: 'mexa', description: 'Quesadilla con birria adentro, guacamole, consomé y cebolla xnipec.', price: '$239' },
+                { id: 19, name: 'Jugo Verde', category: 'jugos', description: 'Naranja, pepino, apio y espinaca.', price: '$89' },
+                { id: 20, name: 'Jugo de Naranja', category: 'jugos', description: 'Fresco y hecho al momento.', price: '$85' },
+                { id: 21, name: 'Jugo Combinado', category: 'jugos', description: 'Naranja y zanahoria.', price: '$89' },
+                { id: 22, name: 'Jugo de Zanahoria', category: 'jugos', description: 'La combinación ideal de sabor y frescura.', price: '$89' },
+                { id: 23, name: 'Smoothie Briyo', category: 'jugos', description: 'Maracuyá, guayaba y naranja.', price: '$116' },
+                { id: 24, name: 'Smoothie Ohana', category: 'jugos', description: 'Horchata, canela y shot de café.', price: '$116' },
+                { id: 25, name: 'Amorosa', category: 'jugos', description: 'Frutos rojos con chía y miel de agave.', price: '$129' },
+                { id: 26, name: 'Mango Meneado', category: 'jugos', description: 'Mango, guayaba y yogurt griego. Base de leche vegetal.', price: '$129' },
+                { id: 27, name: 'Diosa Rosa', category: 'jugos', description: 'Pitahaya con toque cítrico. Base agua.', price: '$116' },
+                { id: 28, name: 'Nuz y Dátil', category: 'jugos', description: 'Plátano, nuez y dátil. Base de leche vegetal.', price: '$116' },
+                { id: 29, name: 'Café Americano', category: 'cafeteria', description: 'Café de Chiapas recién extraído.', price: '$85' },
+                { id: 30, name: 'Cappuccino', category: 'cafeteria', description: 'Espresso de especialidad, leche al vapor, nube cremosa.', price: '$96' },
+                { id: 31, name: 'Latte Clásico', category: 'cafeteria', description: 'Disfrútala hoy, repítela mañana.', price: '$96' },
+                { id: 32, name: 'Moka Oaxaqueño', category: 'cafeteria', description: 'Café y chocolate.', price: '$116' },
+                { id: 33, name: 'Chocolate Oaxaqueño', category: 'cafeteria', description: 'Chocolate artesanal, frío o caliente, con leche a tu preferencia.', price: '$109' },
+                { id: 34, name: 'Latte Matcha', category: 'cafeteria', description: 'Latte verde con matcha.', price: '$103' },
+                { id: 35, name: 'Taro Latte', category: 'cafeteria', description: 'Latte suave y dulce con taro morado.', price: '$103' },
+                { id: 36, name: 'Chai Latte', category: 'cafeteria', description: 'Chai clásico endulzado con miel en polvo.', price: '$103' },
+                { id: 37, name: 'Latte Pistache', category: 'cafeteria', description: 'Café frío con nube de pistache.', price: '$155' },
+                { id: 38, name: 'Concha Rellena', category: 'dulce', description: 'Rellena con nata de mascarpone, acompañada de fresas.', price: '$149' },
+                { id: 39, name: 'Playa', category: 'dulce', description: 'Pan francés brioche con compota de frutos rojos.', price: '$213' },
+                { id: 40, name: 'Pan Francés de la Abuela', category: 'dulce', description: 'Pan brioche con azúcar y canela, arroz con leche y lechera.', price: '$239' },
+                { id: 41, name: 'Omelette Olivo', category: 'flow', description: 'Claras de huevo, espárragos, jitomate rostizado relleno de queso panela, pimientos rostizados, frijoles.', price: '$213' },
+                { id: 42, name: 'Omelette Suculento', category: 'flow', description: 'Claras de huevo, espinacas, champiñones al ajillo con panela, pan de masa madre, guacamole y ensalada.', price: '$219' }
+            ];
+
+            const menuGrid = document.getElementById('menuGrid');
+            const filterBtns = document.querySelectorAll('.menu__filter-btn');
+
+            function renderMenu(category = 'all') {
+                if (!menuGrid) return;
+                const filtered = category === 'all' ? menuItems : menuItems.filter(item => item.category === category);
+                if (filtered.length === 0) {
+                    menuGrid.innerHTML = '<p style="text-align:center; padding:2rem; color: rgba(255,255,255,0.5);">No hay elementos en esta categoría</p>';
+                    return;
+                }
+                menuGrid.innerHTML = filtered.map(item => `
+                    <div class="menu__item" data-category="${item.category}">
+                        <div class="menu__item-body">
+                            <span class="category">${item.category}</span>
+                            <h3>${item.name}</h3>
+                            <p class="description">${item.description}</p>
+                            <p class="price">${item.price}</p>
+                        </div>
                     </div>
-                </div>
-            `).join('');
-        }
+                `).join('');
+            }
 
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                renderMenu(btn.dataset.category);
-            });
-        });
-        renderMenu('all');
-
-        // ---------- GALERÍA ----------
-        const galleryImages = [
-            'img/comida1.jpeg',
-            'img/comida2.jpeg',
-            'img/comida3.jpeg',
-            'img/comida4.jpeg',
-            'img/comida5.jpeg',
-            'img/comida6.jpeg',
-            'img/comida7.jpeg',
-            'img/comida8.jpeg',
-            'img/comida9.jpeg',
-            'img/comida10.jpeg',
-            'img/comida11.jpeg',
-            'img/comida12.jpeg',
-            'img/juegos.jpeg'
-        ];
-
-        const galleryGrid = document.getElementById('galleryGrid');
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightboxImg');
-        const lightboxClose = document.getElementById('lightboxClose');
-
-        if (galleryGrid) {
-            galleryGrid.innerHTML = galleryImages.map(url => 
-                `<img src="${url}" alt="Galería Briyo Café" loading="lazy">`
-            ).join('');
-
-            galleryGrid.querySelectorAll('img').forEach(img => {
-                img.addEventListener('click', () => {
-                    lightboxImg.src = img.src;
-                    lightbox.classList.add('active');
-                    document.body.style.overflow = 'hidden';
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderMenu(btn.dataset.category);
                 });
             });
-        }
+            renderMenu('all');
 
-        // Cerrar lightbox
-        if (lightboxClose) {
-            lightboxClose.addEventListener('click', () => {
-                lightbox.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        }
-        if (lightbox) {
-            lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox) {
+            // ---------- GALERÍA ----------
+            const galleryImages = [
+                'img/comida1.jpeg',
+                'img/comida2.jpeg',
+                'img/comida3.jpeg',
+                'img/comida4.jpeg',
+                'img/comida5.jpeg',
+                'img/comida6.jpeg',
+                'img/comida7.jpeg',
+                'img/comida8.jpeg',
+                'img/comida9.jpeg',
+                'img/comida10.jpeg',
+                'img/comida11.jpeg',
+                'img/comida12.jpeg',
+                'img/juegos.jpeg'
+            ];
+
+            const galleryGrid = document.getElementById('galleryGrid');
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightboxImg');
+            const lightboxClose = document.getElementById('lightboxClose');
+
+            if (galleryGrid) {
+                galleryGrid.innerHTML = galleryImages.map(url => 
+                    `<img src="${url}" alt="Galería Briyo Café" loading="lazy">`
+                ).join('');
+
+                galleryGrid.querySelectorAll('img').forEach(img => {
+                    img.addEventListener('click', () => {
+                        lightboxImg.src = img.src;
+                        lightbox.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    });
+                });
+            }
+
+            if (lightboxClose) {
+                lightboxClose.addEventListener('click', () => {
+                    lightbox.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+            if (lightbox) {
+                lightbox.addEventListener('click', (e) => {
+                    if (e.target === lightbox) {
+                        lightbox.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && lightbox.classList.contains('active')) {
                     lightbox.classList.remove('active');
                     document.body.style.overflow = '';
                 }
             });
-        }
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && lightbox.classList.contains('active')) {
-                lightbox.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
 
-        // ---------- RESERVAS ----------
-        const reservationForm = document.getElementById('reservationForm');
-        if (reservationForm) {
-            reservationForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                // Limpiar errores
-                document.querySelectorAll('.form__error').forEach(el => el.textContent = '');
-
-                const nombre = document.getElementById('nombreReserva').value.trim();
-                const telefono = document.getElementById('telefonoReserva').value.trim();
-                const email = document.getElementById('emailReserva').value.trim();
-                const fecha = document.getElementById('fechaReserva').value;
-                const hora = document.getElementById('horaReserva').value;
-                const personas = document.getElementById('personasReserva').value.trim();
-                const comentarios = document.getElementById('comentariosReserva').value.trim();
-
-                let isValid = true;
-
-                if (nombre.length < 2) {
-                    document.getElementById('nombreReservaError').textContent = 'Ingresa tu nombre completo.';
-                    isValid = false;
-                }
-                if (telefono.replace(/\D/g, '').length < 10) {
-                    document.getElementById('telefonoReservaError').textContent = 'Ingresa un teléfono válido (10 dígitos).';
-                    isValid = false;
-                }
-                if (email && !email.includes('@')) {
-                    document.getElementById('emailReservaError').textContent = 'Correo inválido.';
-                    isValid = false;
-                }
-                const hoy = new Date();
-                hoy.setHours(0,0,0,0);
-                const fechaSeleccionada = new Date(fecha + 'T00:00:00');
-                if (!fecha || fechaSeleccionada < hoy) {
-                    document.getElementById('fechaReservaError').textContent = 'Selecciona una fecha válida (hoy o futura).';
-                    isValid = false;
-                }
-                if (!hora) {
-                    document.getElementById('horaReservaError').textContent = 'Selecciona una hora.';
-                    isValid = false;
-                }
-                if (parseInt(personas) < 1) {
-                    document.getElementById('personasReservaError').textContent = 'Mínimo 1 persona.';
-                    isValid = false;
-                }
-                if (!isValid) return;
-
-                // Formatear fecha y hora
-                const dias = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
-                const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
-                const fechaObj = new Date(fecha + 'T00:00:00');
-                const fechaFormateada = `${dias[fechaObj.getDay()]}, ${fechaObj.getDate()} de ${meses[fechaObj.getMonth()]}`;
-                const [hh, mm] = hora.split(':');
-                const hh12 = hh % 12 || 12;
-                const ampm = hh >= 12 ? 'p.m.' : 'a.m.';
-                const horaFormateada = `${hh12}:${mm} ${ampm}`;
-
-                const mensaje = `☕ ¡Solicitud de Reserva desde la Web!%0A%0A` +
-                    `Nombre: ${encodeURIComponent(nombre)}%0A` +
-                    `Fecha: ${encodeURIComponent(fechaFormateada)}%0A` +
-                    `Hora: ${encodeURIComponent(horaFormateada)}%0A` +
-                    `Personas: ${encodeURIComponent(personas)}%0A` +
-                    `Teléfono: ${encodeURIComponent(telefono)}%0A` +
-                    (email ? `Correo: ${encodeURIComponent(email)}%0A` : '') +
-                    (comentarios ? `Comentarios: ${encodeURIComponent(comentarios)}` : '');
-
-                window.open(`https://api.whatsapp.com/send/?phone=5214775643198&text=${mensaje}&type=phone_number&app_absent=0`, '_blank');
-
-                const successDiv = document.getElementById('reservationSuccess');
-                successDiv.style.display = 'block';
-                setTimeout(() => successDiv.style.display = 'none', 8000);
-            });
-        }
-
-        // ---------- SCROLL SUAVE ----------
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
+            // ---------- RESERVAS ----------
+            const reservationForm = document.getElementById('reservationForm');
+            if (reservationForm) {
+                reservationForm.addEventListener('submit', function(e) {
                     e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+
+                    document.querySelectorAll('.form__error').forEach(el => el.textContent = '');
+
+                    const nombre = document.getElementById('nombreReserva').value.trim();
+                    const telefono = document.getElementById('telefonoReserva').value.trim();
+                    const email = document.getElementById('emailReserva').value.trim();
+                    const fecha = document.getElementById('fechaReserva').value;
+                    const hora = document.getElementById('horaReserva').value;
+                    const personas = document.getElementById('personasReserva').value.trim();
+                    const comentarios = document.getElementById('comentariosReserva').value.trim();
+
+                    let isValid = true;
+
+                    if (nombre.length < 2) {
+                        document.getElementById('nombreReservaError').textContent = 'Ingresa tu nombre completo.';
+                        isValid = false;
+                    }
+                    if (telefono.replace(/\D/g, '').length < 10) {
+                        document.getElementById('telefonoReservaError').textContent = 'Ingresa un teléfono válido (10 dígitos).';
+                        isValid = false;
+                    }
+                    if (email && !email.includes('@')) {
+                        document.getElementById('emailReservaError').textContent = 'Correo inválido.';
+                        isValid = false;
+                    }
+                    const hoy = new Date();
+                    hoy.setHours(0,0,0,0);
+                    const fechaSeleccionada = new Date(fecha + 'T00:00:00');
+                    if (!fecha || fechaSeleccionada < hoy) {
+                        document.getElementById('fechaReservaError').textContent = 'Selecciona una fecha válida (hoy o futura).';
+                        isValid = false;
+                    }
+                    if (!hora) {
+                        document.getElementById('horaReservaError').textContent = 'Selecciona una hora.';
+                        isValid = false;
+                    }
+                    if (parseInt(personas) < 1) {
+                        document.getElementById('personasReservaError').textContent = 'Mínimo 1 persona.';
+                        isValid = false;
+                    }
+                    if (!isValid) return;
+
+                    const dias = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+                    const meses = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+                    const fechaObj = new Date(fecha + 'T00:00:00');
+                    const fechaFormateada = `${dias[fechaObj.getDay()]}, ${fechaObj.getDate()} de ${meses[fechaObj.getMonth()]}`;
+                    const [hh, mm] = hora.split(':');
+                    const hh12 = hh % 12 || 12;
+                    const ampm = hh >= 12 ? 'p.m.' : 'a.m.';
+                    const horaFormateada = `${hh12}:${mm} ${ampm}`;
+
+                    const mensaje = `☕ ¡Solicitud de Reserva desde la Web!%0A%0A` +
+                        `Nombre: ${encodeURIComponent(nombre)}%0A` +
+                        `Fecha: ${encodeURIComponent(fechaFormateada)}%0A` +
+                        `Hora: ${encodeURIComponent(horaFormateada)}%0A` +
+                        `Personas: ${encodeURIComponent(personas)}%0A` +
+                        `Teléfono: ${encodeURIComponent(telefono)}%0A` +
+                        (email ? `Correo: ${encodeURIComponent(email)}%0A` : '') +
+                        (comentarios ? `Comentarios: ${encodeURIComponent(comentarios)}` : '');
+
+                    window.open(`https://api.whatsapp.com/send/?phone=5214775643198&text=${mensaje}&type=phone_number&app_absent=0`, '_blank');
+
+                    const successDiv = document.getElementById('reservationSuccess');
+                    successDiv.style.display = 'block';
+                    setTimeout(() => successDiv.style.display = 'none', 8000);
+                });
+            }
+
+            // ---------- SCROLL SUAVE ----------
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        e.preventDefault();
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
             });
-        });
 
-        // ---------- ANIMACIONES (Intersection Observer) ----------
-        const sections = document.querySelectorAll('.section');
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1 });
-
-        sections.forEach(section => {
-            section.style.opacity = '0';
-            section.style.transform = 'translateY(30px)';
-            section.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
-            observer.observe(section);
-        });
-
-        // Forzar visibilidad inicial en secciones ya visibles
-        setTimeout(() => {
+            // ---------- ANIMACIONES CON FALLBACK ROBUSTO ----------
+            // 1. Añadir clase 'section-hidden' a todas las secciones (excepto hero) para animación
+            const sections = document.querySelectorAll('.section:not(#hero)');
             sections.forEach(section => {
-                const rect = section.getBoundingClientRect();
-                if (rect.top < window.innerHeight * 0.85) {
-                    section.style.opacity = '1';
-                    section.style.transform = 'translateY(0)';
-                }
+                section.classList.add('section-hidden');
             });
-        }, 200);
 
-        console.log('✨ Briyo Café · Diseño renovado listo');
+            // 2. Observador para mostrar secciones al hacer scroll
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.remove('section-hidden');
+                            entry.target.classList.add('section-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15 });
+
+                sections.forEach(section => {
+                    observer.observe(section);
+                });
+                console.log('✅ IntersectionObserver activo');
+            } else {
+                // Fallback: mostrar todo inmediatamente
+                sections.forEach(section => {
+                    section.classList.remove('section-hidden');
+                    section.classList.add('section-visible');
+                });
+                console.warn('⚠️ IntersectionObserver no soportado, se muestran todas las secciones');
+            }
+
+            // 3. Fallback de emergencia: después de 1 segundo, mostrar todas las secciones que sigan ocultas
+            setTimeout(() => {
+                sections.forEach(section => {
+                    if (section.classList.contains('section-hidden')) {
+                        section.classList.remove('section-hidden');
+                        section.classList.add('section-visible');
+                    }
+                });
+                console.log('✅ Fallback: todas las secciones visibles');
+            }, 1200);
+
+            console.log('✨ Briyo Café · Todo cargado correctamente');
+        });
     </script>
 </body>
 </html>
